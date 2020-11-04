@@ -1,0 +1,185 @@
+list_name,name,label
+settlement,nakivale,Nakivale
+settlement,oruchinga,Oruchinga
+settlement,rwamwanja,Rwamwanja
+settlement,kyangwali,Kyangwali
+settlement,kyaka,Kyaka II
+settlement,kiryandongo,Kiryandongo
+settlement,adjumani,Adjumani
+settlement,lobule,Koboko/Lobule
+settlement,rhino,Arua/Rhino Camp
+settlement,palabek,Palabek
+settlement,palorinya,Palorinya
+settlement,imvepi,Imvepi
+settlement,bidibidi,Bidibidi
+market,ayilo_1,Ayilo 1 Market
+market,awindiri,Awindiri
+market,adjuman_main,Adjuman Main Market
+market,maaji_2,Maaji 2 Market
+market,okpotani,Okpotani Market
+market,point_j,Point J Market
+market,arua_main,Arua main market
+market,kubala,Kubala Market
+market,ocea,Ocea Market
+market,ofua_3,Ofua 3 Market
+market,lodonga,Lodonga Market
+market,keri,Keri Market
+market,koboko_main,Koboko Main Market
+market,moyo_main,Moyo Main Market
+market,lodenga,Lodenga Market
+market,koro,Koro Market
+market,bidibidi_reception,Bidibidi Reception Market
+market,yumbe_main,Yumbe Main Market
+market,konyokonyo,Konyokonyo Market
+market,lefori,Lefori Market
+market,kitgum_main,Kitgum main market
+market,palabek_reception,Palabek Reception Market
+market,palabek_ogili,Palabek Ogili Market
+market,palabek_karl,Palabek Karl Market
+market,bweyale_main,Bweyale Main Market
+market,kasonga,Kasonga Market
+market,maratatu,Maratatu Market
+market,kagoma,Kagoma Market
+market,sweswe,Sweswe Market
+market,byabakora,Byabakora Market
+market,bukere,Bukere Market
+market,bisozi,Bisozi Market
+market,katalyeba,Katalyeba Market
+market,kajaho,Kajaho Market
+market,kityaza,Kityaza
+market,new_congo,New Congo
+market,rubondo,Rubondo
+market,other,Other
+change,same,Remained the same
+change,increased,Increased
+change,decreased,Decreased
+safety,more_secure,More secure
+safety,less_secure,Less secure
+safety,no_difference,No difference
+safety_less,corona_infected_indv,Corona-infected individuals in the area
+safety_less,discretionary_behaviour_security,Discretionary behaviour of security personnel
+safety_less,fear_of_theft,Fear of theft
+safety_less,non_compliance_rules,Non-compliance with official rules and regulations of COVID-19 prevention
+safety_less,other,Other
+safety_more,appropriate_behaviour_security,Appropriate behaviour of security personnel
+safety_more,implementation_rules,Implementation of rules and regulations
+safety_more,increased_awareness,Increased awareness about health risks and appropriate behaviour
+safety_more,increased_presence_security,Increased presence of security personnel
+safety_more,installation_sanitary_infra,Installation of sanitary infrastructure
+safety_more,market_less_crowded,Market is less crowded
+safety_more,other,Other
+challenge_option,lack_of_customers,Lack of customers
+challenge_option,transport_restrictions_limited_access,Public and private transport restrictions limiting access to markets
+challenge_option,transport_restrictions_source_market,Transport restrictions limiting ability to source market items
+challenge_option,limited_supply_commodities,Limited supply of some commodities
+challenge_option,lack_of_cash_for_stock,Lack of cash to purchase more stock
+challenge_option,increased_price_transport,Increased price of transportation
+challenge_option,price_fluctuation,Price fluctuation of commodities
+challenge_option,other,Other
+yes_no,yes,Yes
+yes_no,no,No
+sc_reason,not_enough_money,Not enough money to source items
+sc_reason,producers_not_producing_enough,Producers not producing enough
+sc_reason,supplier_unable_to_provide_enough,Supplier unable to provide enough
+sc_reason,difficulty_transporting_items,Difficulty transporting items to marketplace
+sc_reason,no_longer_obtain_items_due_to_restrictions,Can no longer obtain items due to restrictions
+sc_reason,other,Others (specify)
+payment_type,cash_ugx,Cash (UGX)
+payment_type,cash_foreign,Cash (foreign currency)
+payment_type,mobile_money,Mobile money
+payment_type,credit,Credit/debit cards
+payment_type,informal,Informal credit (i.e. a promise to pay later)
+payment_type,voucher,Voucher
+payment_type,other,Other
+border_trade,no_change,No change
+border_trade,increased,Increased
+border_trade,decreased,Decreased
+border_trade,no_cross_border_trade,There is no cross-border trade
+border_trade,i_dont_know,I don’t know
+percent,less_than_10,Less than 10 percent
+percent,by_10_25,By 10 to 25 percent
+percent,by_26_50,By 26 to 50 percent
+percent,more_than_50,By more than 50 percent
+item,cereals,"Cereals (e.g. maize grain, maize flour, millet flour)"
+item,cassava,cassava-fresh
+item,beans,beans
+item,vegetables,Leafy Vegetables
+item,milk,Milk-fresh
+item,fish,Fish-dried
+item,oil,Cooking oil
+item,salt,Salt
+item,wash,"WASH items (e.g. Laundry soap, Sanitary pads, jerrycans, basin)"
+item,energy,"Energy items (e.g. Firewood, Charcoal)"
+item,shelter,"Shelter items (e.g. roofing nails, nylon rope,  bricks, grass thatch, eucalyptus poles)"
+item,household_items,"Household Items (e.g. Utensils, Clothing, Beddings, underwear, torch)"
+item,education,"Education items (e.g. Exercise books, Pencils and pens)"
+item,agricultural,"Agricultural inputs (e.g. Fertilizers, Pesticides, hoes and pangas)"
+item,none,None
+yes_no_dk,yes,Yes
+yes_no_dk,no,No
+yes_no_dk,Dont_know,I dont know
+cereal,maize_grain,maize grain
+cereal,maize_flour,maize flour
+cereal,millet_flour,millet flour
+cereal,sorghum_grain,sorghum grain
+wash,soap,laundry soap
+wash,pads,sanitary pads
+wash,jerrycans,jerrycans
+wash,basin,basin
+energy,firewood,firewood
+energy,charcoal,charcoal
+shelter,nails,roofing nails
+shelter,rope,nylon rope
+shelter,brick_burnt,burnt brick
+shelter,brick_unburnt,unburnt brick
+shelter,grass,grass thatch
+shelter,poles,eucalyptus poles
+household_items,plate,plate-plastic
+household_items,mug,mug-plastic
+household_items,spoon,serving spoon
+household_items,torch,torch
+household_items,dry_cells,dry cells
+household_items,mingle,wooden mingle
+household_items,underwear,underwear-woman
+education_items,book,exercise book
+education_items,pen,pen
+education_items,pencil,pencil
+agricultural,pangea,panga
+agricultural,hoea,hoe
+agricultural,npk,NPK-15
+agricultural,dap,DAP
+agricultural,malathion,Malathion
+vendors_change,Less,Vendors in the market are less than those before COVID-19
+vendors_change,More,Vendors in the market are more than those before COVID-19
+vendors_change,Same,Number of vendors is the same
+price_increase_reason,distribution,"Distribution of cash, food and/or non-food items in the settlement"
+price_increase_reason,seasonal_scarcity,"Harvested stocks are becoming depleted, causing scarcity of the item"
+price_increase_reason,supply_shock,Supply shocks caused by factors such as road damage and poor access to transport
+price_increase_reason,demand_high,High demand due to increase in incomes and increase in the number of customers
+price_increase_reason,trader_actions,Some traders are controlling market prices
+price_increase_reason,others,Others
+price_decrease_reason,distribution,"Distribution of cash, food and/or non-food items in the settlement"
+price_decrease_reason,seasonal_availability,The harvest season has increased availability of the items on the market
+price_decrease_reason,demand_low,Low demand due to low incomes and low purchasing power of the population
+price_decrease_reason,others,Others
+WFP_commodity,beans,Beans
+WFP_commodity,oil,Vegetable oil
+WFP_commodity,csb,CSB++
+WFP_commodity,maize,Maize grain
+WFP_commodity,no_wfp_items,No WFP items sold in the market
+WFP_commodity,didn’t_go_to_market,I was not able to go to the market
+WFP_commodity,none,None
+WFP_items_packed,beans,Beans
+WFP_items_packed,oil,Vegetable oil
+WFP_items_packed,csb,CSB++
+WFP_items_packed,maize,Maize grain
+WFP_items_packed,none,None
+security,secure,I feel secure
+security,insecure,I feel insecure
+security,neutral,I don’t feel secure nor insecure
+vendor_number,0_10,0 to 10
+vendor_number,11_20,11 to 20
+vendor_number,21_30,21 to 30
+vendor_number,31_40,31 to 40
+vendor_number,41_50,41 to 50
+vendor_number,More than 50_50,More than 50
