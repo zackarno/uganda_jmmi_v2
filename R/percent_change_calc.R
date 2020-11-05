@@ -1,6 +1,7 @@
 ## Uganda Market Monitoring - MEB Calculations and Percentage Change Analysis
 ## Last modified 08/06/2020
 
+
 ################################
 # Percentage Change Settlement #
 ################################
@@ -10,7 +11,7 @@
 last_round_unique <- unique(last_round$settlement)
 march_unique <- unique(df_march$settlement)
 
-## Split settlement medians list into mutiples
+## Split settlement medians list into multiples
 settlement_items_split <- settlement_items %>% split.data.frame(.,factor(settlement_items$collection_order))
 
 ## Select unique ID from last month to match on this month

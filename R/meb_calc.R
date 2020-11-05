@@ -13,17 +13,22 @@ meb_items <- item_prices %>% select (-uuid, -market_final, -price_maize_g, -pric
 
 
 
-## Calculate proximity: if a price is missing take the mean of the district, otherwise, Region
+## Calculate proximity: if a price is missing take the mean of settlement, or district, otherwise, regions
+meb_items <- meb_items %>% group_by(settlement, month) %>%
+  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+
 meb_items <- meb_items %>% group_by(district, month) %>%
   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
 
 meb_items <- meb_items %>% group_by(regions, month) %>%
   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
 
+
 ## If NA put price from last round
 meb_items <- meb_items %>% group_by(regions) %>% mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
 
-## Calcualte MEB for food items
+
+## Calculate MEB for food items
 meb_items$meb_maize_f <- meb_items$price_maize_f * 8.7 * 5
 meb_items$meb_beans <- meb_items$price_beans * 5.4 * 5
 meb_items$meb_sorghum <- meb_items$price_sorghum * 1.5 * 5

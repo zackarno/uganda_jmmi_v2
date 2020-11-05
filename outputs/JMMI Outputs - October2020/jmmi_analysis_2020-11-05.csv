@@ -1,0 +1,559 @@
+"","dependent.var","independent.var","dependent.var.value","independent.var.value","numbers","repeat.var","repeat.var.value"
+"9.1","mobile_accepted","regions","no","south west",0.318681318681319,NA,NA
+"9.2","mobile_accepted","regions","yes","south west",0.681318681318681,NA,NA
+"9.3","mobile_accepted","regions","no","west nile",0.553990610328638,NA,NA
+"9.4","mobile_accepted","regions","yes","west nile",0.446009389671362,NA,NA
+"10.1","What types of payment methods do you accept from your customers?","regions","Cash (UGX)","south west",1,NA,NA
+"10.2","What types of payment methods do you accept from your customers?","regions","Cash (UGX)","west nile",0.995305164319249,NA,NA
+"10.3","What types of payment methods do you accept from your customers?","regions","Cash (foreign currency)","south west",0.010989010989011,NA,NA
+"10.4","What types of payment methods do you accept from your customers?","regions","Cash (foreign currency)","west nile",0.00938967136150235,NA,NA
+"10.5","What types of payment methods do you accept from your customers?","regions","Mobile money","south west",0.681318681318681,NA,NA
+"10.6","What types of payment methods do you accept from your customers?","regions","Mobile money","west nile",0.446009389671362,NA,NA
+"10.7","What types of payment methods do you accept from your customers?","regions","Credit/debit cards","south west",0.032967032967033,NA,NA
+"10.8","What types of payment methods do you accept from your customers?","regions","Credit/debit cards","west nile",0,NA,NA
+"10.9","What types of payment methods do you accept from your customers?","regions","Informal credit (i.e. a promise to pay later)","south west",0.32967032967033,NA,NA
+"10.10","What types of payment methods do you accept from your customers?","regions","Informal credit (i.e. a promise to pay later)","west nile",0.112676056338028,NA,NA
+"10.11","What types of payment methods do you accept from your customers?","regions","Voucher","south west",0,NA,NA
+"10.12","What types of payment methods do you accept from your customers?","regions","Voucher","west nile",0.164319248826291,NA,NA
+"10.13","What types of payment methods do you accept from your customers?","regions","Other","south west",0,NA,NA
+"10.14","What types of payment methods do you accept from your customers?","regions","Other","west nile",0,NA,NA
+"11.1","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","0 to 10","south west",0.293333333333333,NA,NA
+"11.2","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","11 to 20","south west",0.44,NA,NA
+"11.3","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","21 to 30","south west",0.08,NA,NA
+"11.4","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","41 to 50","south west",0.0933333333333333,NA,NA
+"11.5","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","More than 50","south west",0.0933333333333333,NA,NA
+"11.6","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","0 to 10","west nile",0.242857142857143,NA,NA
+"11.7","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","11 to 20","west nile",0.180952380952381,NA,NA
+"11.8","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","21 to 30","west nile",0.10952380952381,NA,NA
+"11.9","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","31 to 40","west nile",0.2,NA,NA
+"11.10","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","41 to 50","west nile",0.123809523809524,NA,NA
+"11.11","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","regions","More than 50","west nile",0.142857142857143,NA,NA
+"12.1","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","regions","Decreased","south west",0.131868131868132,NA,NA
+"12.2","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","regions","Increased","south west",0.021978021978022,NA,NA
+"12.3","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","regions","Remained the same","south west",0.747252747252747,NA,NA
+"12.4","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","regions","Same","south west",0.0989010989010989,NA,NA
+"12.5","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","regions","Decreased","west nile",0.0657276995305164,NA,NA
+"12.6","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","regions","Increased","west nile",0.0657276995305164,NA,NA
+"12.7","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","regions","Remained the same","west nile",0.868544600938967,NA,NA
+"13.dependent.var","Over the past **One week**, how many customers have you received **per day** on average?","regions",NA,"south west",20.2747252747253,NA,NA
+"13.dependent.var1","Over the past **One week**, how many customers have you received **per day** on average?","regions",NA,"west nile",21.7761904761905,NA,NA
+"14.dependent.var","How many agents (for mobile money and banks) are currently active in this marketplace/your area of operation?","regions",NA,"south west",10.3,NA,NA
+"14.dependent.var1","How many agents (for mobile money and banks) are currently active in this marketplace/your area of operation?","regions",NA,"west nile",24.4727272727273,NA,NA
+"15.1","How do you feel about your security operating in this marketplace?","regions","I feel insecure","south west",0.106666666666667,NA,NA
+"15.2","How do you feel about your security operating in this marketplace?","regions","I feel secure","south west",0.893333333333333,NA,NA
+"15.3","How do you feel about your security operating in this marketplace?","regions","I feel insecure","west nile",0.00952380952380952,NA,NA
+"15.4","How do you feel about your security operating in this marketplace?","regions","I don’t feel secure nor insecure","west nile",0.619047619047619,NA,NA
+"15.5","How do you feel about your security operating in this marketplace?","regions","I feel secure","west nile",0.371428571428571,NA,NA
+"16.1","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","regions","Less secure","south west",0.0769230769230769,NA,NA
+"16.2","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","regions","More secure","south west",0.208791208791209,NA,NA
+"16.3","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","regions","No difference","south west",0.714285714285714,NA,NA
+"16.4","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","regions","Less secure","west nile",0.0140845070422535,NA,NA
+"16.5","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","regions","More secure","west nile",0.0328638497652582,NA,NA
+"16.6","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","regions","No difference","west nile",0.953051643192488,NA,NA
+"18.1","Why do you feel ${safety}?","regions","Corona-infected individuals in the area","south west",0.021978021978022,NA,NA
+"18.2","Why do you feel ${safety}?","regions","Corona-infected individuals in the area","west nile",0,NA,NA
+"18.3","Why do you feel ${safety}?","regions","Discretionary behaviour of security personnel","south west",0,NA,NA
+"18.4","Why do you feel ${safety}?","regions","Discretionary behaviour of security personnel","west nile",0,NA,NA
+"18.5","Why do you feel ${safety}?","regions","Fear of theft","south west",0.021978021978022,NA,NA
+"18.6","Why do you feel ${safety}?","regions","Fear of theft","west nile",0,NA,NA
+"18.7","Why do you feel ${safety}?","regions","Non-compliance with official rules and regulations of COVID-19 prevention","south west",0.043956043956044,NA,NA
+"18.8","Why do you feel ${safety}?","regions","Non-compliance with official rules and regulations of COVID-19 prevention","west nile",0.0140845070422535,NA,NA
+"18.9","Why do you feel ${safety}?","regions","Other","south west",0,NA,NA
+"18.10","Why do you feel ${safety}?","regions","Other","west nile",0,NA,NA
+"20.1","Why do you feel ${safety}?","regions","Appropriate behaviour of security personnel","south west",0.032967032967033,NA,NA
+"20.2","Why do you feel ${safety}?","regions","Appropriate behaviour of security personnel","west nile",0.0234741784037559,NA,NA
+"20.3","Why do you feel ${safety}?","regions","Implementation of rules and regulations","south west",0.032967032967033,NA,NA
+"20.4","Why do you feel ${safety}?","regions","Implementation of rules and regulations","west nile",0.00938967136150235,NA,NA
+"20.5","Why do you feel ${safety}?","regions","Increased awareness about health risks and appropriate behaviour","south west",0.131868131868132,NA,NA
+"20.6","Why do you feel ${safety}?","regions","Increased awareness about health risks and appropriate behaviour","west nile",0.0187793427230047,NA,NA
+"20.7","Why do you feel ${safety}?","regions","Increased presence of security personnel","south west",0.153846153846154,NA,NA
+"20.8","Why do you feel ${safety}?","regions","Increased presence of security personnel","west nile",0.00938967136150235,NA,NA
+"20.9","Why do you feel ${safety}?","regions","Installation of sanitary infrastructure","south west",0.153846153846154,NA,NA
+"20.10","Why do you feel ${safety}?","regions","Installation of sanitary infrastructure","west nile",0,NA,NA
+"20.11","Why do you feel ${safety}?","regions","Market is less crowded","south west",0.0769230769230769,NA,NA
+"20.12","Why do you feel ${safety}?","regions","Market is less crowded","west nile",0,NA,NA
+"20.13","Why do you feel ${safety}?","regions","Other","south west",0,NA,NA
+"20.14","Why do you feel ${safety}?","regions","Other","west nile",0,NA,NA
+"22.1","Over the **past week**, have there been any commodities for which you had difficulty obtaining a large enough supply to meet your customers’ demand?","regions","No","south west",0.813186813186813,NA,NA
+"22.2","Over the **past week**, have there been any commodities for which you had difficulty obtaining a large enough supply to meet your customers’ demand?","regions","Yes","south west",0.186813186813187,NA,NA
+"22.3","Over the **past week**, have there been any commodities for which you had difficulty obtaining a large enough supply to meet your customers’ demand?","regions","No","west nile",0.877934272300469,NA,NA
+"22.4","Over the **past week**, have there been any commodities for which you had difficulty obtaining a large enough supply to meet your customers’ demand?","regions","Yes","west nile",0.122065727699531,NA,NA
+"24.1","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Not enough money to source items","south west",0.021978021978022,NA,NA
+"24.2","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Not enough money to source items","west nile",0.0140845070422535,NA,NA
+"24.3","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Producers not producing enough","south west",0.054945054945055,NA,NA
+"24.4","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Producers not producing enough","west nile",0.00469483568075117,NA,NA
+"24.5","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Supplier unable to provide enough","south west",0.0659340659340659,NA,NA
+"24.6","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Supplier unable to provide enough","west nile",0.0751173708920188,NA,NA
+"24.7","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Difficulty transporting items to marketplace","south west",0.043956043956044,NA,NA
+"24.8","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Difficulty transporting items to marketplace","west nile",0.0140845070422535,NA,NA
+"24.9","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Can no longer obtain items due to restrictions","south west",0.021978021978022,NA,NA
+"24.10","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Can no longer obtain items due to restrictions","west nile",0.0187793427230047,NA,NA
+"24.11","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Others (specify)","south west",0.0659340659340659,NA,NA
+"24.12","Why did you have difficulty obtaining enough of these items to meet demand?","regions","Others (specify)","west nile",0.00938967136150235,NA,NA
+"26.1","Are you afraid of running out of stocks for certain items **within one week** from now?","regions","No","south west",0.89010989010989,NA,NA
+"26.2","Are you afraid of running out of stocks for certain items **within one week** from now?","regions","Yes","south west",0.10989010989011,NA,NA
+"26.3","Are you afraid of running out of stocks for certain items **within one week** from now?","regions","No","west nile",0.71830985915493,NA,NA
+"26.4","Are you afraid of running out of stocks for certain items **within one week** from now?","regions","Yes","west nile",0.28169014084507,NA,NA
+"28.1","What was the cause of price increase in cereals?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"28.2","What was the cause of price increase in cereals?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0.00469483568075117,NA,NA
+"28.3","What was the cause of price increase in cereals?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0.340659340659341,NA,NA
+"28.4","What was the cause of price increase in cereals?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0.0234741784037559,NA,NA
+"28.5","What was the cause of price increase in cereals?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0.054945054945055,NA,NA
+"28.6","What was the cause of price increase in cereals?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0.0187793427230047,NA,NA
+"28.7","What was the cause of price increase in cereals?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"28.8","What was the cause of price increase in cereals?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0.00469483568075117,NA,NA
+"28.9","What was the cause of price increase in cereals?","regions","Some traders are controlling market prices","south west",0.021978021978022,NA,NA
+"28.10","What was the cause of price increase in cereals?","regions","Some traders are controlling market prices","west nile",0.00469483568075117,NA,NA
+"28.11","What was the cause of price increase in cereals?","regions","Others","south west",0.0989010989010989,NA,NA
+"28.12","What was the cause of price increase in cereals?","regions","Others","west nile",0.00938967136150235,NA,NA
+"30.1","What was the cause of price increase in cassava?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"30.2","What was the cause of price increase in cassava?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"30.3","What was the cause of price increase in cassava?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0,NA,NA
+"30.4","What was the cause of price increase in cassava?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0,NA,NA
+"30.5","What was the cause of price increase in cassava?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0,NA,NA
+"30.6","What was the cause of price increase in cassava?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0,NA,NA
+"30.7","What was the cause of price increase in cassava?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"30.8","What was the cause of price increase in cassava?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0,NA,NA
+"30.9","What was the cause of price increase in cassava?","regions","Some traders are controlling market prices","south west",0,NA,NA
+"30.10","What was the cause of price increase in cassava?","regions","Some traders are controlling market prices","west nile",0,NA,NA
+"30.11","What was the cause of price increase in cassava?","regions","Others","south west",0,NA,NA
+"30.12","What was the cause of price increase in cassava?","regions","Others","west nile",0,NA,NA
+"32.1","What was the cause of price increase in beans?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"32.2","What was the cause of price increase in beans?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0.00469483568075117,NA,NA
+"32.3","What was the cause of price increase in beans?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0.043956043956044,NA,NA
+"32.4","What was the cause of price increase in beans?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0.028169014084507,NA,NA
+"32.5","What was the cause of price increase in beans?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0,NA,NA
+"32.6","What was the cause of price increase in beans?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0.00938967136150235,NA,NA
+"32.7","What was the cause of price increase in beans?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"32.8","What was the cause of price increase in beans?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0.00469483568075117,NA,NA
+"32.9","What was the cause of price increase in beans?","regions","Some traders are controlling market prices","south west",0.010989010989011,NA,NA
+"32.10","What was the cause of price increase in beans?","regions","Some traders are controlling market prices","west nile",0,NA,NA
+"32.11","What was the cause of price increase in beans?","regions","Others","south west",0.010989010989011,NA,NA
+"32.12","What was the cause of price increase in beans?","regions","Others","west nile",0,NA,NA
+"34.1","What was the cause of price increase in vegetables?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"34.2","What was the cause of price increase in vegetables?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"34.3","What was the cause of price increase in vegetables?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0,NA,NA
+"34.4","What was the cause of price increase in vegetables?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0,NA,NA
+"34.5","What was the cause of price increase in vegetables?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0,NA,NA
+"34.6","What was the cause of price increase in vegetables?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0,NA,NA
+"34.7","What was the cause of price increase in vegetables?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"34.8","What was the cause of price increase in vegetables?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0,NA,NA
+"34.9","What was the cause of price increase in vegetables?","regions","Some traders are controlling market prices","south west",0,NA,NA
+"34.10","What was the cause of price increase in vegetables?","regions","Some traders are controlling market prices","west nile",0,NA,NA
+"34.11","What was the cause of price increase in vegetables?","regions","Others","south west",0,NA,NA
+"34.12","What was the cause of price increase in vegetables?","regions","Others","west nile",0,NA,NA
+"36.1","What was the cause of price increase in milk?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"36.2","What was the cause of price increase in milk?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"36.3","What was the cause of price increase in milk?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0,NA,NA
+"36.4","What was the cause of price increase in milk?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0,NA,NA
+"36.5","What was the cause of price increase in milk?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0,NA,NA
+"36.6","What was the cause of price increase in milk?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0,NA,NA
+"36.7","What was the cause of price increase in milk?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"36.8","What was the cause of price increase in milk?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0,NA,NA
+"36.9","What was the cause of price increase in milk?","regions","Some traders are controlling market prices","south west",0,NA,NA
+"36.10","What was the cause of price increase in milk?","regions","Some traders are controlling market prices","west nile",0,NA,NA
+"36.11","What was the cause of price increase in milk?","regions","Others","south west",0,NA,NA
+"36.12","What was the cause of price increase in milk?","regions","Others","west nile",0,NA,NA
+"38.1","What was the cause of price increase in fish?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"38.2","What was the cause of price increase in fish?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"38.3","What was the cause of price increase in fish?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0,NA,NA
+"38.4","What was the cause of price increase in fish?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0,NA,NA
+"38.5","What was the cause of price increase in fish?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0.010989010989011,NA,NA
+"38.6","What was the cause of price increase in fish?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0.0516431924882629,NA,NA
+"38.7","What was the cause of price increase in fish?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"38.8","What was the cause of price increase in fish?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0.0375586854460094,NA,NA
+"38.9","What was the cause of price increase in fish?","regions","Some traders are controlling market prices","south west",0.010989010989011,NA,NA
+"38.10","What was the cause of price increase in fish?","regions","Some traders are controlling market prices","west nile",0,NA,NA
+"38.11","What was the cause of price increase in fish?","regions","Others","south west",0.010989010989011,NA,NA
+"38.12","What was the cause of price increase in fish?","regions","Others","west nile",0,NA,NA
+"40.1","What was the cause of price increase in oil?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"40.2","What was the cause of price increase in oil?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0.0140845070422535,NA,NA
+"40.3","What was the cause of price increase in oil?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0,NA,NA
+"40.4","What was the cause of price increase in oil?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0.00469483568075117,NA,NA
+"40.5","What was the cause of price increase in oil?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0,NA,NA
+"40.6","What was the cause of price increase in oil?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0,NA,NA
+"40.7","What was the cause of price increase in oil?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"40.8","What was the cause of price increase in oil?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0.028169014084507,NA,NA
+"40.9","What was the cause of price increase in oil?","regions","Some traders are controlling market prices","south west",0,NA,NA
+"40.10","What was the cause of price increase in oil?","regions","Some traders are controlling market prices","west nile",0.00469483568075117,NA,NA
+"40.11","What was the cause of price increase in oil?","regions","Others","south west",0.032967032967033,NA,NA
+"40.12","What was the cause of price increase in oil?","regions","Others","west nile",0.00469483568075117,NA,NA
+"42.1","What was the cause of price increase in salt?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"42.2","What was the cause of price increase in salt?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"42.3","What was the cause of price increase in salt?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0,NA,NA
+"42.4","What was the cause of price increase in salt?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0,NA,NA
+"42.5","What was the cause of price increase in salt?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0,NA,NA
+"42.6","What was the cause of price increase in salt?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0,NA,NA
+"42.7","What was the cause of price increase in salt?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"42.8","What was the cause of price increase in salt?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0,NA,NA
+"42.9","What was the cause of price increase in salt?","regions","Some traders are controlling market prices","south west",0,NA,NA
+"42.10","What was the cause of price increase in salt?","regions","Some traders are controlling market prices","west nile",0,NA,NA
+"42.11","What was the cause of price increase in salt?","regions","Others","south west",0,NA,NA
+"42.12","What was the cause of price increase in salt?","regions","Others","west nile",0,NA,NA
+"44.1","What was the cause of price increase in wash items?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"44.2","What was the cause of price increase in wash items?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"44.3","What was the cause of price increase in wash items?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0,NA,NA
+"44.4","What was the cause of price increase in wash items?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0,NA,NA
+"44.5","What was the cause of price increase in wash items?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0,NA,NA
+"44.6","What was the cause of price increase in wash items?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0,NA,NA
+"44.7","What was the cause of price increase in wash items?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"44.8","What was the cause of price increase in wash items?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0,NA,NA
+"44.9","What was the cause of price increase in wash items?","regions","Some traders are controlling market prices","south west",0,NA,NA
+"44.10","What was the cause of price increase in wash items?","regions","Some traders are controlling market prices","west nile",0,NA,NA
+"44.11","What was the cause of price increase in wash items?","regions","Others","south west",0.010989010989011,NA,NA
+"44.12","What was the cause of price increase in wash items?","regions","Others","west nile",0,NA,NA
+"46.1","What was the cause of price increase in energy items?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"46.2","What was the cause of price increase in energy items?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"46.3","What was the cause of price increase in energy items?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","south west",0.032967032967033,NA,NA
+"46.4","What was the cause of price increase in energy items?","regions","Harvested stocks are becoming depleted, causing scarcity of the item","west nile",0,NA,NA
+"46.5","What was the cause of price increase in energy items?","regions","Supply shocks caused by factors such as road damage and poor access to transport","south west",0.043956043956044,NA,NA
+"46.6","What was the cause of price increase in energy items?","regions","Supply shocks caused by factors such as road damage and poor access to transport","west nile",0,NA,NA
+"46.7","What was the cause of price increase in energy items?","regions","High demand due to increase in incomes and increase in the number of customers","south west",0,NA,NA
+"46.8","What was the cause of price increase in energy items?","regions","High demand due to increase in incomes and increase in the number of customers","west nile",0,NA,NA
+"46.9","What was the cause of price increase in energy items?","regions","Some traders are controlling market prices","south west",0.010989010989011,NA,NA
+"46.10","What was the cause of price increase in energy items?","regions","Some traders are controlling market prices","west nile",0,NA,NA
+"46.11","What was the cause of price increase in energy items?","regions","Others","south west",0.032967032967033,NA,NA
+"46.12","What was the cause of price increase in energy items?","regions","Others","west nile",0,NA,NA
+"48.1","What was the cause of price decrease in cereals?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"48.2","What was the cause of price decrease in cereals?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0.0704225352112676,NA,NA
+"48.3","What was the cause of price decrease in cereals?","regions","The harvest season has increased availability of the items on the market","south west",0.164835164835165,NA,NA
+"48.4","What was the cause of price decrease in cereals?","regions","The harvest season has increased availability of the items on the market","west nile",0.0938967136150235,NA,NA
+"48.5","What was the cause of price decrease in cereals?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0.175824175824176,NA,NA
+"48.6","What was the cause of price decrease in cereals?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0.0610328638497653,NA,NA
+"48.7","What was the cause of price decrease in cereals?","regions","Others","south west",0.021978021978022,NA,NA
+"48.8","What was the cause of price decrease in cereals?","regions","Others","west nile",0.00938967136150235,NA,NA
+"50.1","What was the cause of price decrease in cassava?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"50.2","What was the cause of price decrease in cassava?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"50.3","What was the cause of price decrease in cassava?","regions","The harvest season has increased availability of the items on the market","south west",0,NA,NA
+"50.4","What was the cause of price decrease in cassava?","regions","The harvest season has increased availability of the items on the market","west nile",0.00938967136150235,NA,NA
+"50.5","What was the cause of price decrease in cassava?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0,NA,NA
+"50.6","What was the cause of price decrease in cassava?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0,NA,NA
+"50.7","What was the cause of price decrease in cassava?","regions","Others","south west",0,NA,NA
+"50.8","What was the cause of price decrease in cassava?","regions","Others","west nile",0,NA,NA
+"52.1","What was the cause of price decrease in beans?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"52.2","What was the cause of price decrease in beans?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0.07981220657277,NA,NA
+"52.3","What was the cause of price decrease in beans?","regions","The harvest season has increased availability of the items on the market","south west",0.274725274725275,NA,NA
+"52.4","What was the cause of price decrease in beans?","regions","The harvest season has increased availability of the items on the market","west nile",0.112676056338028,NA,NA
+"52.5","What was the cause of price decrease in beans?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0.131868131868132,NA,NA
+"52.6","What was the cause of price decrease in beans?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0.0375586854460094,NA,NA
+"52.7","What was the cause of price decrease in beans?","regions","Others","south west",0.0879120879120879,NA,NA
+"52.8","What was the cause of price decrease in beans?","regions","Others","west nile",0.00938967136150235,NA,NA
+"54.1","What was the cause of price decrease in vegetables?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"54.2","What was the cause of price decrease in vegetables?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0.0140845070422535,NA,NA
+"54.3","What was the cause of price decrease in vegetables?","regions","The harvest season has increased availability of the items on the market","south west",0,NA,NA
+"54.4","What was the cause of price decrease in vegetables?","regions","The harvest season has increased availability of the items on the market","west nile",0.0657276995305164,NA,NA
+"54.5","What was the cause of price decrease in vegetables?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0,NA,NA
+"54.6","What was the cause of price decrease in vegetables?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0.0187793427230047,NA,NA
+"54.7","What was the cause of price decrease in vegetables?","regions","Others","south west",0,NA,NA
+"54.8","What was the cause of price decrease in vegetables?","regions","Others","west nile",0,NA,NA
+"56.1","What was the cause of price decrease in milk?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"56.2","What was the cause of price decrease in milk?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"56.3","What was the cause of price decrease in milk?","regions","The harvest season has increased availability of the items on the market","south west",0,NA,NA
+"56.4","What was the cause of price decrease in milk?","regions","The harvest season has increased availability of the items on the market","west nile",0,NA,NA
+"56.5","What was the cause of price decrease in milk?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0,NA,NA
+"56.6","What was the cause of price decrease in milk?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0,NA,NA
+"56.7","What was the cause of price decrease in milk?","regions","Others","south west",0,NA,NA
+"56.8","What was the cause of price decrease in milk?","regions","Others","west nile",0,NA,NA
+"58.1","What was the cause of price decrease in fish?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"58.2","What was the cause of price decrease in fish?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"58.3","What was the cause of price decrease in fish?","regions","The harvest season has increased availability of the items on the market","south west",0,NA,NA
+"58.4","What was the cause of price decrease in fish?","regions","The harvest season has increased availability of the items on the market","west nile",0,NA,NA
+"58.5","What was the cause of price decrease in fish?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0,NA,NA
+"58.6","What was the cause of price decrease in fish?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0,NA,NA
+"58.7","What was the cause of price decrease in fish?","regions","Others","south west",0,NA,NA
+"58.8","What was the cause of price decrease in fish?","regions","Others","west nile",0,NA,NA
+"60.1","What was the cause of price decrease in oil?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"60.2","What was the cause of price decrease in oil?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0.0751173708920188,NA,NA
+"60.3","What was the cause of price decrease in oil?","regions","The harvest season has increased availability of the items on the market","south west",0,NA,NA
+"60.4","What was the cause of price decrease in oil?","regions","The harvest season has increased availability of the items on the market","west nile",0.00469483568075117,NA,NA
+"60.5","What was the cause of price decrease in oil?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0,NA,NA
+"60.6","What was the cause of price decrease in oil?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0.00469483568075117,NA,NA
+"60.7","What was the cause of price decrease in oil?","regions","Others","south west",0.010989010989011,NA,NA
+"60.8","What was the cause of price decrease in oil?","regions","Others","west nile",0.0140845070422535,NA,NA
+"62.1","What was the cause of price decrease in salt?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"62.2","What was the cause of price decrease in salt?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"62.3","What was the cause of price decrease in salt?","regions","The harvest season has increased availability of the items on the market","south west",0,NA,NA
+"62.4","What was the cause of price decrease in salt?","regions","The harvest season has increased availability of the items on the market","west nile",0,NA,NA
+"62.5","What was the cause of price decrease in salt?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0.197802197802198,NA,NA
+"62.6","What was the cause of price decrease in salt?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0,NA,NA
+"62.7","What was the cause of price decrease in salt?","regions","Others","south west",0.120879120879121,NA,NA
+"62.8","What was the cause of price decrease in salt?","regions","Others","west nile",0,NA,NA
+"64.1","What was the cause of price decrease in wash items?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"64.2","What was the cause of price decrease in wash items?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"64.3","What was the cause of price decrease in wash items?","regions","The harvest season has increased availability of the items on the market","south west",0,NA,NA
+"64.4","What was the cause of price decrease in wash items?","regions","The harvest season has increased availability of the items on the market","west nile",0,NA,NA
+"64.5","What was the cause of price decrease in wash items?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0.010989010989011,NA,NA
+"64.6","What was the cause of price decrease in wash items?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0,NA,NA
+"64.7","What was the cause of price decrease in wash items?","regions","Others","south west",0,NA,NA
+"64.8","What was the cause of price decrease in wash items?","regions","Others","west nile",0,NA,NA
+"66.1","What was the cause of price decrease in energy items?","regions","Distribution of cash, food and/or non-food items in the settlement","south west",0,NA,NA
+"66.2","What was the cause of price decrease in energy items?","regions","Distribution of cash, food and/or non-food items in the settlement","west nile",0,NA,NA
+"66.3","What was the cause of price decrease in energy items?","regions","The harvest season has increased availability of the items on the market","south west",0,NA,NA
+"66.4","What was the cause of price decrease in energy items?","regions","The harvest season has increased availability of the items on the market","west nile",0,NA,NA
+"66.5","What was the cause of price decrease in energy items?","regions","Low demand due to low incomes and low purchasing power of the population","south west",0,NA,NA
+"66.6","What was the cause of price decrease in energy items?","regions","Low demand due to low incomes and low purchasing power of the population","west nile",0,NA,NA
+"66.7","What was the cause of price decrease in energy items?","regions","Others","south west",0,NA,NA
+"66.8","What was the cause of price decrease in energy items?","regions","Others","west nile",0,NA,NA
+"68.1","Over the **past week**, which item categories experienced an **increase in price**?","regions","Cereals (e.g. maize grain, maize flour, millet flour)","south west",0.417582417582418,NA,NA
+"68.2","Over the **past week**, which item categories experienced an **increase in price**?","regions","Cereals (e.g. maize grain, maize flour, millet flour)","west nile",0.0422535211267606,NA,NA
+"68.3","Over the **past week**, which item categories experienced an **increase in price**?","regions","cassava-fresh","south west",0,NA,NA
+"68.4","Over the **past week**, which item categories experienced an **increase in price**?","regions","cassava-fresh","west nile",0,NA,NA
+"68.5","Over the **past week**, which item categories experienced an **increase in price**?","regions","beans","south west",0.0659340659340659,NA,NA
+"68.6","Over the **past week**, which item categories experienced an **increase in price**?","regions","beans","west nile",0.0469483568075117,NA,NA
+"68.7","Over the **past week**, which item categories experienced an **increase in price**?","regions","Leafy Vegetables","south west",0,NA,NA
+"68.8","Over the **past week**, which item categories experienced an **increase in price**?","regions","Leafy Vegetables","west nile",0,NA,NA
+"68.9","Over the **past week**, which item categories experienced an **increase in price**?","regions","Milk-fresh","south west",0,NA,NA
+"68.10","Over the **past week**, which item categories experienced an **increase in price**?","regions","Milk-fresh","west nile",0,NA,NA
+"68.11","Over the **past week**, which item categories experienced an **increase in price**?","regions","Fish-dried","south west",0.032967032967033,NA,NA
+"68.12","Over the **past week**, which item categories experienced an **increase in price**?","regions","Fish-dried","west nile",0.0563380281690141,NA,NA
+"68.13","Over the **past week**, which item categories experienced an **increase in price**?","regions","Cooking oil","south west",0.043956043956044,NA,NA
+"68.14","Over the **past week**, which item categories experienced an **increase in price**?","regions","Cooking oil","west nile",0.0516431924882629,NA,NA
+"68.15","Over the **past week**, which item categories experienced an **increase in price**?","regions","Salt","south west",0.021978021978022,NA,NA
+"68.16","Over the **past week**, which item categories experienced an **increase in price**?","regions","Salt","west nile",0,NA,NA
+"68.17","Over the **past week**, which item categories experienced an **increase in price**?","regions","WASH items (e.g. Laundry soap, Sanitary pads, jerrycans, basin)","south west",0.010989010989011,NA,NA
+"68.18","Over the **past week**, which item categories experienced an **increase in price**?","regions","WASH items (e.g. Laundry soap, Sanitary pads, jerrycans, basin)","west nile",0,NA,NA
+"68.19","Over the **past week**, which item categories experienced an **increase in price**?","regions","Energy items (e.g. Firewood, Charcoal)","south west",0.043956043956044,NA,NA
+"68.20","Over the **past week**, which item categories experienced an **increase in price**?","regions","Energy items (e.g. Firewood, Charcoal)","west nile",0,NA,NA
+"68.21","Over the **past week**, which item categories experienced an **increase in price**?","regions","Shelter items (e.g. roofing nails, nylon rope,  bricks, grass thatch, eucalyptus poles)","south west",0,NA,NA
+"68.22","Over the **past week**, which item categories experienced an **increase in price**?","regions","Shelter items (e.g. roofing nails, nylon rope,  bricks, grass thatch, eucalyptus poles)","west nile",0.028169014084507,NA,NA
+"68.23","Over the **past week**, which item categories experienced an **increase in price**?","regions","Household Items (e.g. Utensils, Clothing, Beddings, underwear, torch)","south west",0,NA,NA
+"68.24","Over the **past week**, which item categories experienced an **increase in price**?","regions","Household Items (e.g. Utensils, Clothing, Beddings, underwear, torch)","west nile",0,NA,NA
+"68.25","Over the **past week**, which item categories experienced an **increase in price**?","regions","Education items (e.g. Exercise books, Pencils and pens)","south west",0.010989010989011,NA,NA
+"68.26","Over the **past week**, which item categories experienced an **increase in price**?","regions","Education items (e.g. Exercise books, Pencils and pens)","west nile",0,NA,NA
+"68.27","Over the **past week**, which item categories experienced an **increase in price**?","regions","Agricultural inputs (e.g. Fertilizers, Pesticides, hoes and pangas)","south west",0,NA,NA
+"68.28","Over the **past week**, which item categories experienced an **increase in price**?","regions","Agricultural inputs (e.g. Fertilizers, Pesticides, hoes and pangas)","west nile",0,NA,NA
+"68.29","Over the **past week**, which item categories experienced an **increase in price**?","regions","None","south west",0.494505494505495,NA,NA
+"68.30","Over the **past week**, which item categories experienced an **increase in price**?","regions","None","west nile",0.802816901408451,NA,NA
+"70.1","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Cereals (e.g. maize grain, maize flour, millet flour)","south west",0.208791208791209,NA,NA
+"70.2","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Cereals (e.g. maize grain, maize flour, millet flour)","west nile",0.131455399061033,NA,NA
+"70.3","Over the **past week**, which item categories experienced a **decrease in price**?","regions","cassava-fresh","south west",0,NA,NA
+"70.4","Over the **past week**, which item categories experienced a **decrease in price**?","regions","cassava-fresh","west nile",0.00938967136150235,NA,NA
+"70.5","Over the **past week**, which item categories experienced a **decrease in price**?","regions","beans","south west",0.340659340659341,NA,NA
+"70.6","Over the **past week**, which item categories experienced a **decrease in price**?","regions","beans","west nile",0.136150234741784,NA,NA
+"70.7","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Leafy Vegetables","south west",0,NA,NA
+"70.8","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Leafy Vegetables","west nile",0.0751173708920188,NA,NA
+"70.9","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Milk-fresh","south west",0,NA,NA
+"70.10","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Milk-fresh","west nile",0,NA,NA
+"70.11","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Fish-dried","south west",0,NA,NA
+"70.12","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Fish-dried","west nile",0,NA,NA
+"70.13","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Cooking oil","south west",0.032967032967033,NA,NA
+"70.14","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Cooking oil","west nile",0.0892018779342723,NA,NA
+"70.15","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Salt","south west",0.230769230769231,NA,NA
+"70.16","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Salt","west nile",0,NA,NA
+"70.17","Over the **past week**, which item categories experienced a **decrease in price**?","regions","WASH items (e.g. Laundry soap, Sanitary pads, jerrycans, basin)","south west",0.010989010989011,NA,NA
+"70.18","Over the **past week**, which item categories experienced a **decrease in price**?","regions","WASH items (e.g. Laundry soap, Sanitary pads, jerrycans, basin)","west nile",0,NA,NA
+"70.19","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Energy items (e.g. Firewood, Charcoal)","south west",0,NA,NA
+"70.20","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Energy items (e.g. Firewood, Charcoal)","west nile",0,NA,NA
+"70.21","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Shelter items (e.g. roofing nails, nylon rope,  bricks, grass thatch, eucalyptus poles)","south west",0,NA,NA
+"70.22","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Shelter items (e.g. roofing nails, nylon rope,  bricks, grass thatch, eucalyptus poles)","west nile",0,NA,NA
+"70.23","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Household Items (e.g. Utensils, Clothing, Beddings, underwear, torch)","south west",0,NA,NA
+"70.24","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Household Items (e.g. Utensils, Clothing, Beddings, underwear, torch)","west nile",0,NA,NA
+"70.25","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Education items (e.g. Exercise books, Pencils and pens)","south west",0,NA,NA
+"70.26","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Education items (e.g. Exercise books, Pencils and pens)","west nile",0,NA,NA
+"70.27","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Agricultural inputs (e.g. Fertilizers, Pesticides, hoes and pangas)","south west",0,NA,NA
+"70.28","Over the **past week**, which item categories experienced a **decrease in price**?","regions","Agricultural inputs (e.g. Fertilizers, Pesticides, hoes and pangas)","west nile",0,NA,NA
+"70.29","Over the **past week**, which item categories experienced a **decrease in price**?","regions","None","south west",0.384615384615385,NA,NA
+"70.30","Over the **past week**, which item categories experienced a **decrease in price**?","regions","None","west nile",0.751173708920188,NA,NA
+"72.1","What is the number one challenge that traders in this market have faced in the past one week?","regions","Lack of customers","south west",0.395604395604396,NA,NA
+"72.2","What is the number one challenge that traders in this market have faced in the past one week?","regions","Lack of customers","west nile",0.328638497652582,NA,NA
+"72.3","What is the number one challenge that traders in this market have faced in the past one week?","regions","Public and private transport restrictions limiting access to markets","south west",0,NA,NA
+"72.4","What is the number one challenge that traders in this market have faced in the past one week?","regions","Public and private transport restrictions limiting access to markets","west nile",0.0422535211267606,NA,NA
+"72.5","What is the number one challenge that traders in this market have faced in the past one week?","regions","Transport restrictions limiting ability to source market items","south west",0.0659340659340659,NA,NA
+"72.6","What is the number one challenge that traders in this market have faced in the past one week?","regions","Transport restrictions limiting ability to source market items","west nile",0.549295774647887,NA,NA
+"72.7","What is the number one challenge that traders in this market have faced in the past one week?","regions","Limited supply of some commodities","south west",0.120879120879121,NA,NA
+"72.8","What is the number one challenge that traders in this market have faced in the past one week?","regions","Limited supply of some commodities","west nile",0.563380281690141,NA,NA
+"72.9","What is the number one challenge that traders in this market have faced in the past one week?","regions","Lack of cash to purchase more stock","south west",0.208791208791209,NA,NA
+"72.10","What is the number one challenge that traders in this market have faced in the past one week?","regions","Lack of cash to purchase more stock","west nile",0.732394366197183,NA,NA
+"72.11","What is the number one challenge that traders in this market have faced in the past one week?","regions","Increased price of transportation","south west",0.263736263736264,NA,NA
+"72.12","What is the number one challenge that traders in this market have faced in the past one week?","regions","Increased price of transportation","west nile",0.769953051643192,NA,NA
+"72.13","What is the number one challenge that traders in this market have faced in the past one week?","regions","Price fluctuation of commodities","south west",0.461538461538462,NA,NA
+"72.14","What is the number one challenge that traders in this market have faced in the past one week?","regions","Price fluctuation of commodities","west nile",0.633802816901408,NA,NA
+"72.15","What is the number one challenge that traders in this market have faced in the past one week?","regions","Other","south west",0.285714285714286,NA,NA
+"72.16","What is the number one challenge that traders in this market have faced in the past one week?","regions","Other","west nile",0.0234741784037559,NA,NA
+"1.1","mobile_accepted","country","no","uganda",0.483552631578947,"country","uganda"
+"1.2","mobile_accepted","country","yes","uganda",0.516447368421053,"country","uganda"
+"2.1","What types of payment methods do you accept from your customers?","country","Cash (UGX)","uganda",0.996710526315789,"country","uganda"
+"2.2","What types of payment methods do you accept from your customers?","country","Cash (foreign currency)","uganda",0.00986842105263158,"country","uganda"
+"2.3","What types of payment methods do you accept from your customers?","country","Mobile money","uganda",0.516447368421053,"country","uganda"
+"2.4","What types of payment methods do you accept from your customers?","country","Credit/debit cards","uganda",0.00986842105263158,"country","uganda"
+"2.5","What types of payment methods do you accept from your customers?","country","Informal credit (i.e. a promise to pay later)","uganda",0.177631578947368,"country","uganda"
+"2.6","What types of payment methods do you accept from your customers?","country","Voucher","uganda",0.115131578947368,"country","uganda"
+"2.7","What types of payment methods do you accept from your customers?","country","Other","uganda",0,"country","uganda"
+"3.1","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","country","0 to 10","uganda",0.256140350877193,"country","uganda"
+"3.2","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","country","11 to 20","uganda",0.249122807017544,"country","uganda"
+"3.3","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","country","21 to 30","uganda",0.101754385964912,"country","uganda"
+"3.4","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","country","31 to 40","uganda",0.147368421052632,"country","uganda"
+"3.5","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","country","41 to 50","uganda",0.115789473684211,"country","uganda"
+"3.6","Could you please estimate how many vendors, <span style=""color:blue""> selling similar items as you do or have a similar business as yours </span>, are operating in this marketplace/area of operation?","country","More than 50","uganda",0.129824561403509,"country","uganda"
+"4.1","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","country","Decreased","uganda",0.0855263157894737,"country","uganda"
+"4.2","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","country","Increased","uganda",0.0526315789473684,"country","uganda"
+"4.3","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","country","Remained the same","uganda",0.832236842105263,"country","uganda"
+"4.4","Compared to one week ago, how has the number of vendors selling similar items as you do changed?","country","Same","uganda",0.0296052631578947,"country","uganda"
+"5","Over the past **One week**, how many customers have you received **per day** on average?","country",NA,"uganda",21.3222591362126,"country","uganda"
+"6","How many agents (for mobile money and banks) are currently active in this marketplace/your area of operation?","country",NA,"uganda",19.4705882352941,"country","uganda"
+"7.1","How do you feel about your security operating in this marketplace?","country","I feel insecure","uganda",0.0350877192982456,"country","uganda"
+"7.2","How do you feel about your security operating in this marketplace?","country","I don’t feel secure nor insecure","uganda",0.456140350877193,"country","uganda"
+"7.3","How do you feel about your security operating in this marketplace?","country","I feel secure","uganda",0.508771929824561,"country","uganda"
+"8.1","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","country","Less secure","uganda",0.0328947368421053,"country","uganda"
+"8.2","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","country","More secure","uganda",0.0855263157894737,"country","uganda"
+"8.3","Compared to **one week ago**, how has your feeling about your security operating in this marketplace changed?","country","No difference","uganda",0.881578947368421,"country","uganda"
+"91.1","Why do you feel ${safety}?","country","Corona-infected individuals in the area","uganda",0.00657894736842105,"country","uganda"
+"91.2","Why do you feel ${safety}?","country","Discretionary behaviour of security personnel","uganda",0,"country","uganda"
+"91.3","Why do you feel ${safety}?","country","Fear of theft","uganda",0.00657894736842105,"country","uganda"
+"91.4","Why do you feel ${safety}?","country","Non-compliance with official rules and regulations of COVID-19 prevention","uganda",0.0230263157894737,"country","uganda"
+"91.5","Why do you feel ${safety}?","country","Other","uganda",0,"country","uganda"
+"101.1","Why do you feel ${safety}?","country","Appropriate behaviour of security personnel","uganda",0.0263157894736842,"country","uganda"
+"101.2","Why do you feel ${safety}?","country","Implementation of rules and regulations","uganda",0.0164473684210526,"country","uganda"
+"101.3","Why do you feel ${safety}?","country","Increased awareness about health risks and appropriate behaviour","uganda",0.0526315789473684,"country","uganda"
+"101.4","Why do you feel ${safety}?","country","Increased presence of security personnel","uganda",0.0526315789473684,"country","uganda"
+"101.5","Why do you feel ${safety}?","country","Installation of sanitary infrastructure","uganda",0.0460526315789474,"country","uganda"
+"101.6","Why do you feel ${safety}?","country","Market is less crowded","uganda",0.0230263157894737,"country","uganda"
+"101.7","Why do you feel ${safety}?","country","Other","uganda",0,"country","uganda"
+"111.1","Over the **past week**, have there been any commodities for which you had difficulty obtaining a large enough supply to meet your customers’ demand?","country","No","uganda",0.858552631578947,"country","uganda"
+"111.2","Over the **past week**, have there been any commodities for which you had difficulty obtaining a large enough supply to meet your customers’ demand?","country","Yes","uganda",0.141447368421053,"country","uganda"
+"121.1","Why did you have difficulty obtaining enough of these items to meet demand?","country","Not enough money to source items","uganda",0.0164473684210526,"country","uganda"
+"121.2","Why did you have difficulty obtaining enough of these items to meet demand?","country","Producers not producing enough","uganda",0.0197368421052632,"country","uganda"
+"121.3","Why did you have difficulty obtaining enough of these items to meet demand?","country","Supplier unable to provide enough","uganda",0.0723684210526316,"country","uganda"
+"121.4","Why did you have difficulty obtaining enough of these items to meet demand?","country","Difficulty transporting items to marketplace","uganda",0.0230263157894737,"country","uganda"
+"121.5","Why did you have difficulty obtaining enough of these items to meet demand?","country","Can no longer obtain items due to restrictions","uganda",0.0197368421052632,"country","uganda"
+"121.6","Why did you have difficulty obtaining enough of these items to meet demand?","country","Others (specify)","uganda",0.0263157894736842,"country","uganda"
+"131.1","Are you afraid of running out of stocks for certain items **within one week** from now?","country","No","uganda",0.769736842105263,"country","uganda"
+"131.2","Are you afraid of running out of stocks for certain items **within one week** from now?","country","Yes","uganda",0.230263157894737,"country","uganda"
+"141.1","What was the cause of price increase in cereals?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0.00328947368421053,"country","uganda"
+"141.2","What was the cause of price increase in cereals?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0.118421052631579,"country","uganda"
+"141.3","What was the cause of price increase in cereals?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0.0296052631578947,"country","uganda"
+"141.4","What was the cause of price increase in cereals?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0.00328947368421053,"country","uganda"
+"141.5","What was the cause of price increase in cereals?","country","Some traders are controlling market prices","uganda",0.00986842105263158,"country","uganda"
+"141.6","What was the cause of price increase in cereals?","country","Others","uganda",0.0361842105263158,"country","uganda"
+"151.1","What was the cause of price increase in cassava?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"151.2","What was the cause of price increase in cassava?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0,"country","uganda"
+"151.3","What was the cause of price increase in cassava?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0,"country","uganda"
+"151.4","What was the cause of price increase in cassava?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0,"country","uganda"
+"151.5","What was the cause of price increase in cassava?","country","Some traders are controlling market prices","uganda",0,"country","uganda"
+"151.6","What was the cause of price increase in cassava?","country","Others","uganda",0,"country","uganda"
+"161.1","What was the cause of price increase in beans?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0.00328947368421053,"country","uganda"
+"161.2","What was the cause of price increase in beans?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0.0328947368421053,"country","uganda"
+"161.3","What was the cause of price increase in beans?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0.00657894736842105,"country","uganda"
+"161.4","What was the cause of price increase in beans?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0.00328947368421053,"country","uganda"
+"161.5","What was the cause of price increase in beans?","country","Some traders are controlling market prices","uganda",0.00328947368421053,"country","uganda"
+"161.6","What was the cause of price increase in beans?","country","Others","uganda",0.00328947368421053,"country","uganda"
+"17.1","What was the cause of price increase in vegetables?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"17.2","What was the cause of price increase in vegetables?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0,"country","uganda"
+"17.3","What was the cause of price increase in vegetables?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0,"country","uganda"
+"17.4","What was the cause of price increase in vegetables?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0,"country","uganda"
+"17.5","What was the cause of price increase in vegetables?","country","Some traders are controlling market prices","uganda",0,"country","uganda"
+"17.6","What was the cause of price increase in vegetables?","country","Others","uganda",0,"country","uganda"
+"181.1","What was the cause of price increase in milk?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"181.2","What was the cause of price increase in milk?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0,"country","uganda"
+"181.3","What was the cause of price increase in milk?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0,"country","uganda"
+"181.4","What was the cause of price increase in milk?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0,"country","uganda"
+"181.5","What was the cause of price increase in milk?","country","Some traders are controlling market prices","uganda",0,"country","uganda"
+"181.6","What was the cause of price increase in milk?","country","Others","uganda",0,"country","uganda"
+"19.1","What was the cause of price increase in fish?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"19.2","What was the cause of price increase in fish?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0,"country","uganda"
+"19.3","What was the cause of price increase in fish?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0.0394736842105263,"country","uganda"
+"19.4","What was the cause of price increase in fish?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0.0263157894736842,"country","uganda"
+"19.5","What was the cause of price increase in fish?","country","Some traders are controlling market prices","uganda",0.00328947368421053,"country","uganda"
+"19.6","What was the cause of price increase in fish?","country","Others","uganda",0.00328947368421053,"country","uganda"
+"201.1","What was the cause of price increase in oil?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0.00986842105263158,"country","uganda"
+"201.2","What was the cause of price increase in oil?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0.00328947368421053,"country","uganda"
+"201.3","What was the cause of price increase in oil?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0,"country","uganda"
+"201.4","What was the cause of price increase in oil?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0.0197368421052632,"country","uganda"
+"201.5","What was the cause of price increase in oil?","country","Some traders are controlling market prices","uganda",0.00328947368421053,"country","uganda"
+"201.6","What was the cause of price increase in oil?","country","Others","uganda",0.0131578947368421,"country","uganda"
+"21.1","What was the cause of price increase in salt?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"21.2","What was the cause of price increase in salt?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0,"country","uganda"
+"21.3","What was the cause of price increase in salt?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0,"country","uganda"
+"21.4","What was the cause of price increase in salt?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0,"country","uganda"
+"21.5","What was the cause of price increase in salt?","country","Some traders are controlling market prices","uganda",0,"country","uganda"
+"21.6","What was the cause of price increase in salt?","country","Others","uganda",0,"country","uganda"
+"221.1","What was the cause of price increase in wash items?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"221.2","What was the cause of price increase in wash items?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0,"country","uganda"
+"221.3","What was the cause of price increase in wash items?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0,"country","uganda"
+"221.4","What was the cause of price increase in wash items?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0,"country","uganda"
+"221.5","What was the cause of price increase in wash items?","country","Some traders are controlling market prices","uganda",0,"country","uganda"
+"221.6","What was the cause of price increase in wash items?","country","Others","uganda",0.00328947368421053,"country","uganda"
+"23.1","What was the cause of price increase in energy items?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"23.2","What was the cause of price increase in energy items?","country","Harvested stocks are becoming depleted, causing scarcity of the item","uganda",0.00986842105263158,"country","uganda"
+"23.3","What was the cause of price increase in energy items?","country","Supply shocks caused by factors such as road damage and poor access to transport","uganda",0.0131578947368421,"country","uganda"
+"23.4","What was the cause of price increase in energy items?","country","High demand due to increase in incomes and increase in the number of customers","uganda",0,"country","uganda"
+"23.5","What was the cause of price increase in energy items?","country","Some traders are controlling market prices","uganda",0.00328947368421053,"country","uganda"
+"23.6","What was the cause of price increase in energy items?","country","Others","uganda",0.00986842105263158,"country","uganda"
+"241.1","What was the cause of price decrease in cereals?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0.0493421052631579,"country","uganda"
+"241.2","What was the cause of price decrease in cereals?","country","The harvest season has increased availability of the items on the market","uganda",0.115131578947368,"country","uganda"
+"241.3","What was the cause of price decrease in cereals?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0.0953947368421053,"country","uganda"
+"241.4","What was the cause of price decrease in cereals?","country","Others","uganda",0.0131578947368421,"country","uganda"
+"25.1","What was the cause of price decrease in cassava?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"25.2","What was the cause of price decrease in cassava?","country","The harvest season has increased availability of the items on the market","uganda",0.00657894736842105,"country","uganda"
+"25.3","What was the cause of price decrease in cassava?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0,"country","uganda"
+"25.4","What was the cause of price decrease in cassava?","country","Others","uganda",0,"country","uganda"
+"261.1","What was the cause of price decrease in beans?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0.0559210526315789,"country","uganda"
+"261.2","What was the cause of price decrease in beans?","country","The harvest season has increased availability of the items on the market","uganda",0.161184210526316,"country","uganda"
+"261.3","What was the cause of price decrease in beans?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0.0657894736842105,"country","uganda"
+"261.4","What was the cause of price decrease in beans?","country","Others","uganda",0.0328947368421053,"country","uganda"
+"27.1","What was the cause of price decrease in vegetables?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0.00986842105263158,"country","uganda"
+"27.2","What was the cause of price decrease in vegetables?","country","The harvest season has increased availability of the items on the market","uganda",0.0460526315789474,"country","uganda"
+"27.3","What was the cause of price decrease in vegetables?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0.0131578947368421,"country","uganda"
+"27.4","What was the cause of price decrease in vegetables?","country","Others","uganda",0,"country","uganda"
+"281.1","What was the cause of price decrease in milk?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"281.2","What was the cause of price decrease in milk?","country","The harvest season has increased availability of the items on the market","uganda",0,"country","uganda"
+"281.3","What was the cause of price decrease in milk?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0,"country","uganda"
+"281.4","What was the cause of price decrease in milk?","country","Others","uganda",0,"country","uganda"
+"29.1","What was the cause of price decrease in fish?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"29.2","What was the cause of price decrease in fish?","country","The harvest season has increased availability of the items on the market","uganda",0,"country","uganda"
+"29.3","What was the cause of price decrease in fish?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0,"country","uganda"
+"29.4","What was the cause of price decrease in fish?","country","Others","uganda",0,"country","uganda"
+"301.1","What was the cause of price decrease in oil?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0.0526315789473684,"country","uganda"
+"301.2","What was the cause of price decrease in oil?","country","The harvest season has increased availability of the items on the market","uganda",0.00328947368421053,"country","uganda"
+"301.3","What was the cause of price decrease in oil?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0.00328947368421053,"country","uganda"
+"301.4","What was the cause of price decrease in oil?","country","Others","uganda",0.0131578947368421,"country","uganda"
+"31.1","What was the cause of price decrease in salt?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"31.2","What was the cause of price decrease in salt?","country","The harvest season has increased availability of the items on the market","uganda",0,"country","uganda"
+"31.3","What was the cause of price decrease in salt?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0.0592105263157895,"country","uganda"
+"31.4","What was the cause of price decrease in salt?","country","Others","uganda",0.0361842105263158,"country","uganda"
+"321.1","What was the cause of price decrease in wash items?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"321.2","What was the cause of price decrease in wash items?","country","The harvest season has increased availability of the items on the market","uganda",0,"country","uganda"
+"321.3","What was the cause of price decrease in wash items?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0.00328947368421053,"country","uganda"
+"321.4","What was the cause of price decrease in wash items?","country","Others","uganda",0,"country","uganda"
+"33.1","What was the cause of price decrease in energy items?","country","Distribution of cash, food and/or non-food items in the settlement","uganda",0,"country","uganda"
+"33.2","What was the cause of price decrease in energy items?","country","The harvest season has increased availability of the items on the market","uganda",0,"country","uganda"
+"33.3","What was the cause of price decrease in energy items?","country","Low demand due to low incomes and low purchasing power of the population","uganda",0,"country","uganda"
+"33.4","What was the cause of price decrease in energy items?","country","Others","uganda",0,"country","uganda"
+"341.1","Over the **past week**, which item categories experienced an **increase in price**?","country","Cereals (e.g. maize grain, maize flour, millet flour)","uganda",0.154605263157895,"country","uganda"
+"341.2","Over the **past week**, which item categories experienced an **increase in price**?","country","cassava-fresh","uganda",0,"country","uganda"
+"341.3","Over the **past week**, which item categories experienced an **increase in price**?","country","beans","uganda",0.0526315789473684,"country","uganda"
+"341.4","Over the **past week**, which item categories experienced an **increase in price**?","country","Leafy Vegetables","uganda",0,"country","uganda"
+"341.5","Over the **past week**, which item categories experienced an **increase in price**?","country","Milk-fresh","uganda",0,"country","uganda"
+"341.6","Over the **past week**, which item categories experienced an **increase in price**?","country","Fish-dried","uganda",0.0493421052631579,"country","uganda"
+"341.7","Over the **past week**, which item categories experienced an **increase in price**?","country","Cooking oil","uganda",0.0493421052631579,"country","uganda"
+"341.8","Over the **past week**, which item categories experienced an **increase in price**?","country","Salt","uganda",0.00657894736842105,"country","uganda"
+"341.9","Over the **past week**, which item categories experienced an **increase in price**?","country","WASH items (e.g. Laundry soap, Sanitary pads, jerrycans, basin)","uganda",0.00328947368421053,"country","uganda"
+"341.10","Over the **past week**, which item categories experienced an **increase in price**?","country","Energy items (e.g. Firewood, Charcoal)","uganda",0.0131578947368421,"country","uganda"
+"341.11","Over the **past week**, which item categories experienced an **increase in price**?","country","Shelter items (e.g. roofing nails, nylon rope,  bricks, grass thatch, eucalyptus poles)","uganda",0.0197368421052632,"country","uganda"
+"341.12","Over the **past week**, which item categories experienced an **increase in price**?","country","Household Items (e.g. Utensils, Clothing, Beddings, underwear, torch)","uganda",0,"country","uganda"
+"341.13","Over the **past week**, which item categories experienced an **increase in price**?","country","Education items (e.g. Exercise books, Pencils and pens)","uganda",0.00328947368421053,"country","uganda"
+"341.14","Over the **past week**, which item categories experienced an **increase in price**?","country","Agricultural inputs (e.g. Fertilizers, Pesticides, hoes and pangas)","uganda",0,"country","uganda"
+"341.15","Over the **past week**, which item categories experienced an **increase in price**?","country","None","uganda",0.710526315789474,"country","uganda"
+"35.1","Over the **past week**, which item categories experienced a **decrease in price**?","country","Cereals (e.g. maize grain, maize flour, millet flour)","uganda",0.154605263157895,"country","uganda"
+"35.2","Over the **past week**, which item categories experienced a **decrease in price**?","country","cassava-fresh","uganda",0.00657894736842105,"country","uganda"
+"35.3","Over the **past week**, which item categories experienced a **decrease in price**?","country","beans","uganda",0.197368421052632,"country","uganda"
+"35.4","Over the **past week**, which item categories experienced a **decrease in price**?","country","Leafy Vegetables","uganda",0.0526315789473684,"country","uganda"
+"35.5","Over the **past week**, which item categories experienced a **decrease in price**?","country","Milk-fresh","uganda",0,"country","uganda"
+"35.6","Over the **past week**, which item categories experienced a **decrease in price**?","country","Fish-dried","uganda",0,"country","uganda"
+"35.7","Over the **past week**, which item categories experienced a **decrease in price**?","country","Cooking oil","uganda",0.0723684210526316,"country","uganda"
+"35.8","Over the **past week**, which item categories experienced a **decrease in price**?","country","Salt","uganda",0.069078947368421,"country","uganda"
+"35.9","Over the **past week**, which item categories experienced a **decrease in price**?","country","WASH items (e.g. Laundry soap, Sanitary pads, jerrycans, basin)","uganda",0.00328947368421053,"country","uganda"
+"35.10","Over the **past week**, which item categories experienced a **decrease in price**?","country","Energy items (e.g. Firewood, Charcoal)","uganda",0,"country","uganda"
+"35.11","Over the **past week**, which item categories experienced a **decrease in price**?","country","Shelter items (e.g. roofing nails, nylon rope,  bricks, grass thatch, eucalyptus poles)","uganda",0,"country","uganda"
+"35.12","Over the **past week**, which item categories experienced a **decrease in price**?","country","Household Items (e.g. Utensils, Clothing, Beddings, underwear, torch)","uganda",0,"country","uganda"
+"35.13","Over the **past week**, which item categories experienced a **decrease in price**?","country","Education items (e.g. Exercise books, Pencils and pens)","uganda",0,"country","uganda"
+"35.14","Over the **past week**, which item categories experienced a **decrease in price**?","country","Agricultural inputs (e.g. Fertilizers, Pesticides, hoes and pangas)","uganda",0,"country","uganda"
+"35.15","Over the **past week**, which item categories experienced a **decrease in price**?","country","None","uganda",0.641447368421053,"country","uganda"
+"361.1","What is the number one challenge that traders in this market have faced in the past one week?","country","Lack of customers","uganda",0.348684210526316,"country","uganda"
+"361.2","What is the number one challenge that traders in this market have faced in the past one week?","country","Public and private transport restrictions limiting access to markets","uganda",0.0296052631578947,"country","uganda"
+"361.3","What is the number one challenge that traders in this market have faced in the past one week?","country","Transport restrictions limiting ability to source market items","uganda",0.404605263157895,"country","uganda"
+"361.4","What is the number one challenge that traders in this market have faced in the past one week?","country","Limited supply of some commodities","uganda",0.430921052631579,"country","uganda"
+"361.5","What is the number one challenge that traders in this market have faced in the past one week?","country","Lack of cash to purchase more stock","uganda",0.575657894736842,"country","uganda"
+"361.6","What is the number one challenge that traders in this market have faced in the past one week?","country","Increased price of transportation","uganda",0.618421052631579,"country","uganda"
+"361.7","What is the number one challenge that traders in this market have faced in the past one week?","country","Price fluctuation of commodities","uganda",0.582236842105263,"country","uganda"
+"361.8","What is the number one challenge that traders in this market have faced in the past one week?","country","Other","uganda",0.101973684210526,"country","uganda"

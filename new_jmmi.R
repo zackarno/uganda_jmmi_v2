@@ -6,6 +6,9 @@ rm(list=ls())
 
 today <- Sys.Date()
 
+## Download and install hypegrammaR from IMPACT GitHub
+#devtools::install_github("impact-initiatives/hypegrammaR", build_opts = c())
+
 
 ## Load required packaged
 library(openxlsx)
@@ -20,18 +23,18 @@ source("./R/functions.R")
 
 
 ## Round names - these need to be changed at every round
-this_round_vec <- "September"
-last_round_vec <- "August"
+this_round_vec <- "October"
+last_round_vec <- "September"
 
 
 ## Load data from this round, last round, and march
-this_round <- read.xlsx("./inputs/Raw market data-September 2020_New_format.xlsx") # update the code with the latest cleaned file
+this_round <- read.xlsx("./inputs/Raw market data-October 2020.xlsx") # update the code with the latest cleaned file
 this_round <- this_round %>% mutate(month = as.numeric(month)) %>% mutate(settlement = str_replace(settlement, "rhino", "rhino camp"))
 names(this_round)[names(this_round)=="_uuid"] <- "uuid"
 
 
 ## Load data from last round
-last_round <- read.xlsx("inputs/WFP_Market data_August2020_NewVars.xlsx")
+last_round <- read.xlsx("inputs/Raw market data-September 2020_New_format.xlsx") # update the code with last month cleaned file
 last_round <- last_round %>% mutate(month = as.numeric(month)) %>% mutate(settlement = str_replace(settlement, "rhino", "rhino camp"))
 names(last_round)[names(last_round)=="X_uuid"] <- "uuid"
 
@@ -65,7 +68,7 @@ df$regions[df$sub_regions == "Acholi" | df$sub_regions == "West nile" ] <- "west
 df$regions[df$DISTRICT == "Bunyoro" ] <- "west nile"
 
 
-# Collection period - This will need to change according to the month being analysed
+# Collection period
 mymonths <- c("January","February","March",
               "April","May","June",
               "July","August","September",
@@ -178,7 +181,7 @@ markets_nationwide <- item_prices %>%  select(regions, month, market_final) %>%
   group_by(month) %>% 
   summarise(num_market_assessed = n_distinct(market_final),
             num_assessed = length(month),
-            level = "ational") %>% 
+            level = "national") %>% 
   filter(month == this_round_vec) %>% 
   select(level,num_market_assessed,num_assessed)
 
@@ -209,7 +212,7 @@ list_of_datasets_meb <- list("Settlement MEB" = meb_items,
                          "Percent change MEB Settlment" = percent_change_meb_settlement,
                          "Percent change MEB Regional" = percent_change_meb_regional,
                          "Percent change MEB National" = percent_change_meb_national
-)
+                          )
 
 
 ## Save files
@@ -222,7 +225,6 @@ write.xlsx(list_of_datasets_meb, paste0("outputs/UGA_JMMI_MEB and percentage cha
 
 ### Load data analysis plan and questionnaire
 dap <- load_analysisplan("./inputs/dap/jmmi_dap_v1.csv")
-choices <- read.csv("./inputs/kobo/choices.csv")
 
 
 kobo_tool <- load_questionnaire(this_round,
@@ -233,6 +235,7 @@ kobo_tool <- load_questionnaire(this_round,
 
 ## Prepare dataset for analysis
 df_analysis <- df %>% mutate(mobile_accepted = ifelse(grepl("mobile_money", payment_type), "yes", "no")) %>% filter(month == this_round_vec)
+
 df_analysis$customer_number <- as.numeric(df_analysis$customer_number)
 df_analysis$agents_number <- as.numeric(df_analysis$agents_number)
 
