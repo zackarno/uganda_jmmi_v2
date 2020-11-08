@@ -128,7 +128,7 @@ data_merge <- cbind(national,
                     percent_change_set,
                     meb_set,
                     meb_reg_sw,
-                    meb_reg_sw,
+                    meb_reg_wn,
                     meb_nat,
                     num_assessed_merge,
                     rank_dm)
