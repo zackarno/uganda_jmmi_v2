@@ -1,5 +1,5 @@
 ## Uganda Market Monitoring - Update R Script
-## Last modified 10/04/2020
+## Last modified 2020-01-06
 
 ## this code cleans your environment
 rm(list=ls())
@@ -23,18 +23,18 @@ source("./R/functions.R")
 
 
 ## Round names - these need to be changed at every round
-this_round_vec <- "October"
-last_round_vec <- "September"
+this_round_vec <- "November"
+last_round_vec <- "October"
 
 
 ## Load data from this round, last round, and march
-this_round <- read.xlsx("./inputs/Raw market data-October 2020.xlsx") # update the code with the latest cleaned file
+this_round <- read.xlsx("./inputs/Raw data November 2020_clean.xlsx") # update the code with the latest cleaned file
 this_round <- this_round %>% mutate(month = as.numeric(month)) %>% mutate(settlement = str_replace(settlement, "rhino", "rhino camp"))
 names(this_round)[names(this_round)=="_uuid"] <- "uuid"
 
 
 ## Load data from last round
-last_round <- read.xlsx("inputs/Raw market data-September 2020_New_format.xlsx") # update the code with last month cleaned file
+last_round <- read.xlsx("inputs/Raw market data-October 2020.xlsx") # update the code with last month cleaned file
 last_round <- last_round %>% mutate(month = as.numeric(month)) %>% mutate(settlement = str_replace(settlement, "rhino", "rhino camp"))
 names(last_round)[names(last_round)=="X_uuid"] <- "uuid"
 
@@ -48,6 +48,9 @@ df_march <- df_march %>% mutate(settlement = str_replace(settlement, "rhino", "r
 
 # Creating one big dataframe with all the values from past rounds
 df <- rbindlist(list(this_round, last_round, df_march), fill = TRUE)
+df$vendors_change %>% table()
+last_round$vendors_change %>% table()
+this_round$vendors_change %>% table()
 
 # Add the settlement coordinates to the dataset
 df <- left_join(df, settlement_data, by="settlement") 
@@ -90,6 +93,13 @@ df$country <- "uganda"
 
 df <- df %>% select(c("month","country", "district", "regions", "settlement", "market_final"), everything())
 
+# WFP/REACH decided to remove 'Less' from vendors_change data as it should not have been an option 
+if(this_round_vec=="November"){
+  df<-df %>% 
+    mutate(vendors_change= case_when(month=="November"&vendors_change=="Less"~NA_character_,
+                                     TRUE~vendors_change))  
+  
+}
 
 
 ## Means Calculation
@@ -196,23 +206,23 @@ source("./R/percent_change_calc.R")
 
 ## Data exports 
 list_of_datasets_med <- list("Market mean price" = markets_items,
-                         "Settlement mean price" = settlement_items,
-                         "District Mean" = district_items,
-                         "Region mean" = region_items,
-                         "National level mean" = national_items,
-                         "Percent change Settlement" = change_settlement,
-                         "Percent change Region" = percent_change_region,
-                         "Percent change National" = percent_change_national,
-                         "Rank settlements" = rank_settlments
-                         )
+                             "Settlement mean price" = settlement_items,
+                             "District Mean" = district_items,
+                             "Region mean" = region_items,
+                             "National level mean" = national_items,
+                             "Percent change Settlement" = change_settlement,
+                             "Percent change Region" = percent_change_region,
+                             "Percent change National" = percent_change_national,
+                             "Rank settlements" = rank_settlments
+)
 
 list_of_datasets_meb <- list("Settlement MEB" = meb_items,
-                         "Regional MEB" = meb_items_regional,
-                         "National MEB" = meb_items_national,
-                         "Percent change MEB Settlment" = percent_change_meb_settlement,
-                         "Percent change MEB Regional" = percent_change_meb_regional,
-                         "Percent change MEB National" = percent_change_meb_national
-                          )
+                             "Regional MEB" = meb_items_regional,
+                             "National MEB" = meb_items_national,
+                             "Percent change MEB Settlment" = percent_change_meb_settlement,
+                             "Percent change MEB Regional" = percent_change_meb_regional,
+                             "Percent change MEB National" = percent_change_meb_national
+)
 
 
 ## Save files
@@ -233,6 +243,7 @@ kobo_tool <- load_questionnaire(this_round,
                                 choices.label.column.to.use = "label")
 
 
+k
 ## Prepare dataset for analysis
 df_analysis <- df %>% mutate(mobile_accepted = ifelse(grepl("mobile_money", payment_type), "yes", "no")) %>% filter(month == this_round_vec)
 
@@ -252,9 +263,9 @@ summary.stats.list <- analysis$results %>%
 
 ## Save tabulated analysis file
 summary.stats.list %>% 
-                resultlist_summary_statistics_as_one_table %>% 
-                select(-se, -min, -max) %>%
-                map_to_file(paste0("./outputs/jmmi_analysis_",today,".csv"))
+  resultlist_summary_statistics_as_one_table %>% 
+  select(-se, -min, -max) %>%
+  map_to_file(paste0("./outputs/jmmi_analysis_",today,".csv"))
 
 
 ## Save html analysis file
@@ -276,65 +287,67 @@ vec1 <- c(1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3)
 vec2 <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2)
 
 ## Rename based on choices from kobo
+# need choice object
+choices <- read.csv("./inputs/kobo/choices.csv")
 summary.stats.list$dependent.var.value <- choices$label[match(summary.stats.list$dependent.var.value, choices$name)]
 
 ## All markets 
 top3_uganda <- summary.stats.list %>% filter(dependent.var == "payment_type" |
-                                             dependent.var == "safety_reason_less_secure" |
-                                             dependent.var == "safety_reason_more_secure" |
-                                             dependent.var == "item_scarcity_reason" |
-                                             dependent.var == "price_increase_item" |
-                                             dependent.var == "price_decrease_item" |
-                                             dependent.var == "challenge") %>% 
-                                      filter(independent.var.value == "uganda") %>%
-                                      arrange(desc(numbers)) %>%
-                                      group_by(dependent.var) %>%
-                                      slice(1:3)
+                                               dependent.var == "safety_reason_less_secure" |
+                                               dependent.var == "safety_reason_more_secure" |
+                                               dependent.var == "item_scarcity_reason" |
+                                               dependent.var == "price_increase_item" |
+                                               dependent.var == "price_decrease_item" |
+                                               dependent.var == "challenge") %>% 
+  filter(independent.var.value == "uganda") %>%
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:3)
 
 ## Add ranking col and rename the options
 top3_uganda$rank <- vec1
 
 ## New var for data merge and pivot wider
 top3_uganda <- top3_uganda %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-                                       select(new_var, numbers, dependent.var.value) %>%
-                                       pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(new_var, numbers, dependent.var.value) %>%
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## South West Region
 top3_southwest <- summary.stats.list %>% filter(dependent.var == "payment_type" |
-                                                dependent.var == "safety_reason_less_secure" |
-                                                dependent.var == "safety_reason_more_secure" |
-                                                dependent.var == "item_scarcity_reason" |
-                                                dependent.var == "price_increase_item" |
-                                                dependent.var == "price_decrease_item" |
-                                                dependent.var == "challenge") %>% 
-                                        filter(independent.var.value == "south west") %>%
-                                        arrange(desc(numbers)) %>%
-                                        group_by(dependent.var) %>%
-                                        slice(1:3)
+                                                  dependent.var == "safety_reason_less_secure" |
+                                                  dependent.var == "safety_reason_more_secure" |
+                                                  dependent.var == "item_scarcity_reason" |
+                                                  dependent.var == "price_increase_item" |
+                                                  dependent.var == "price_decrease_item" |
+                                                  dependent.var == "challenge") %>% 
+  filter(independent.var.value == "south west") %>%
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:3)
 ## Add ranking col
 top3_southwest$rank <- vec1
 
 ## New var for datamerge and pivot wider
 top3_southwest <- top3_southwest %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>%  ungroup() %>%
-                                     select(new_var, numbers, dependent.var.value) %>% 
-                                     pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(new_var, numbers, dependent.var.value) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 
 
 ## West Nile regions
 top3_westnile<- summary.stats.list %>% filter(dependent.var == "payment_type" |
-                                              dependent.var == "safety_reason_less_secure" |
-                                              dependent.var == "safety_reason_more_secure" |
-                                              dependent.var == "item_scarcity_reason" |
-                                              dependent.var == "price_increase_item" |
-                                              dependent.var == "price_decrease_item" |
-                                              dependent.var == "challenge") %>%
-                                      filter(independent.var.value == "west nile") %>% 
-                                      arrange(desc(numbers)) %>%
-                                      group_by(dependent.var) %>%
-                                      slice(1:3)
+                                                dependent.var == "safety_reason_less_secure" |
+                                                dependent.var == "safety_reason_more_secure" |
+                                                dependent.var == "item_scarcity_reason" |
+                                                dependent.var == "price_increase_item" |
+                                                dependent.var == "price_decrease_item" |
+                                                dependent.var == "challenge") %>%
+  filter(independent.var.value == "west nile") %>% 
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:3)
 
 ## Add ranking col
 top3_westnile$rank <- vec1
@@ -342,8 +355,8 @@ top3_westnile$rank <- vec1
 
 ## New var for datamerge and pivot wider
 top3_westnile <- top3_westnile %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-                                   select(new_var, numbers, dependent.var.value) %>% 
-                                   pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(new_var, numbers, dependent.var.value) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 
@@ -353,52 +366,6 @@ top3_westnile <- top3_westnile %>% mutate(new_var = paste0(independent.var.value
 
 ## All markets 
 top2_uganda <- summary.stats.list %>% filter(dependent.var == "cereal_increase_reason" |
-                                             dependent.var == "cassava_increase_reason" |
-                                             dependent.var == "beans_increase_reason" |
-                                             dependent.var == "vegetables_increase_reason" |
-                                             dependent.var == "milk_increase_reason" |
-                                             dependent.var == "fish_increase_reason" |
-                                             dependent.var == "oil_increase_reason" |
-                                             dependent.var == "salt_increase_reason" |
-                                             dependent.var == "wash_increase_reason" |
-                                             dependent.var == "energy_increase_reason") %>% 
-                                      filter(independent.var.value == "uganda") %>%
-                                      arrange(desc(numbers)) %>%
-                                      group_by(dependent.var) %>%
-                                      slice(1:2)
-## Add ranking col
-top2_uganda$rank <- vec2
-
-## New var for datamerge and pivot wider
-top2_uganda <- top2_uganda %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-                               select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
-
-
-## South West
-top2_southwest <- summary.stats.list %>% filter(dependent.var == "cereal_increase_reason" |
-                                                dependent.var == "cassava_increase_reason" |
-                                                dependent.var == "beans_increase_reason" |
-                                                dependent.var == "vegetables_increase_reason" |
-                                                dependent.var == "milk_increase_reason" |
-                                                dependent.var == "fish_increase_reason" |
-                                                dependent.var == "oil_increase_reason" |
-                                                dependent.var == "salt_increase_reason" |
-                                                dependent.var == "wash_increase_reason" |
-                                                dependent.var == "energy_increase_reason") %>% 
-                                         filter(independent.var.value == "south west") %>%
-                                         arrange(desc(numbers)) %>%
-                                         group_by(dependent.var) %>%
-                                         slice(1:2)
-## Add ranking col
-top2_southwest$rank <- vec2
-
-## New var for datamerge and pivot wider
-top2_southwest <- top2_southwest %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-                                     select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
-
-
-## West Nile
-top2_westnile <- summary.stats.list %>% filter(dependent.var == "cereal_increase_reason" |
                                                dependent.var == "cassava_increase_reason" |
                                                dependent.var == "beans_increase_reason" |
                                                dependent.var == "vegetables_increase_reason" |
@@ -408,16 +375,62 @@ top2_westnile <- summary.stats.list %>% filter(dependent.var == "cereal_increase
                                                dependent.var == "salt_increase_reason" |
                                                dependent.var == "wash_increase_reason" |
                                                dependent.var == "energy_increase_reason") %>% 
-                                       filter(independent.var.value == "west nile") %>%
-                                       arrange(desc(numbers)) %>%
-                                       group_by(dependent.var) %>%
-                                       slice(1:2)
+  filter(independent.var.value == "uganda") %>%
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:2)
+## Add ranking col
+top2_uganda$rank <- vec2
+
+## New var for datamerge and pivot wider
+top2_uganda <- top2_uganda %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
+  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+
+
+## South West
+top2_southwest <- summary.stats.list %>% filter(dependent.var == "cereal_increase_reason" |
+                                                  dependent.var == "cassava_increase_reason" |
+                                                  dependent.var == "beans_increase_reason" |
+                                                  dependent.var == "vegetables_increase_reason" |
+                                                  dependent.var == "milk_increase_reason" |
+                                                  dependent.var == "fish_increase_reason" |
+                                                  dependent.var == "oil_increase_reason" |
+                                                  dependent.var == "salt_increase_reason" |
+                                                  dependent.var == "wash_increase_reason" |
+                                                  dependent.var == "energy_increase_reason") %>% 
+  filter(independent.var.value == "south west") %>%
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:2)
+## Add ranking col
+top2_southwest$rank <- vec2
+
+## New var for datamerge and pivot wider
+top2_southwest <- top2_southwest %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
+  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+
+
+## West Nile
+top2_westnile <- summary.stats.list %>% filter(dependent.var == "cereal_increase_reason" |
+                                                 dependent.var == "cassava_increase_reason" |
+                                                 dependent.var == "beans_increase_reason" |
+                                                 dependent.var == "vegetables_increase_reason" |
+                                                 dependent.var == "milk_increase_reason" |
+                                                 dependent.var == "fish_increase_reason" |
+                                                 dependent.var == "oil_increase_reason" |
+                                                 dependent.var == "salt_increase_reason" |
+                                                 dependent.var == "wash_increase_reason" |
+                                                 dependent.var == "energy_increase_reason") %>% 
+  filter(independent.var.value == "west nile") %>%
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:2)
 ## Add ranking col
 top2_westnile$rank <- vec2
 
 ## New var for datamerge and pivot wider
 top2_westnile <- top2_westnile %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-                                   select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 
@@ -427,74 +440,74 @@ top2_westnile <- top2_westnile %>% mutate(new_var = paste0(independent.var.value
 
 ## All markets 
 top2_uganda_dec <- summary.stats.list %>% filter(dependent.var == "cereal_decrease_reason" |
-                                                 dependent.var == "cassava_decrease_reason" |
-                                                 dependent.var == "beans_decrease_reason" |
-                                                 dependent.var == "vegetables_decrease_reason" |
-                                                 dependent.var == "milk_decrease_reason" |
-                                                 dependent.var == "fish_decrease_reason" |
-                                                 dependent.var == "oil_decrease_reason" |
-                                                 dependent.var == "salt_decrease_reason" |
-                                                 dependent.var == "wash_decrease_reason" |
-                                                 dependent.var == "energy_decrease_reason") %>% 
-                                         filter(independent.var.value == "uganda") %>%
-                                         arrange(desc(numbers)) %>%
-                                         group_by(dependent.var) %>%
-                                         slice(1:2)
+                                                   dependent.var == "cassava_decrease_reason" |
+                                                   dependent.var == "beans_decrease_reason" |
+                                                   dependent.var == "vegetables_decrease_reason" |
+                                                   dependent.var == "milk_decrease_reason" |
+                                                   dependent.var == "fish_decrease_reason" |
+                                                   dependent.var == "oil_decrease_reason" |
+                                                   dependent.var == "salt_decrease_reason" |
+                                                   dependent.var == "wash_decrease_reason" |
+                                                   dependent.var == "energy_decrease_reason") %>% 
+  filter(independent.var.value == "uganda") %>%
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:2)
 ## Add ranking col
 top2_uganda_dec$rank <- vec2
 
 ## New var for datamerge and pivot wider
 top2_uganda_dec <- top2_uganda_dec %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-                                       select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 
 
 ## South West 
 top2_southwest_dec <- summary.stats.list %>% filter(dependent.var == "cereal_decrease_reason" |
-                                                    dependent.var == "cassava_decrease_reason" |
-                                                    dependent.var == "beans_decrease_reason" |
-                                                    dependent.var == "vegetables_decrease_reason" |
-                                                    dependent.var == "milk_decrease_reason" |
-                                                    dependent.var == "fish_decrease_reason" |
-                                                    dependent.var == "oil_decrease_reason" |
-                                                    dependent.var == "salt_decrease_reason" |
-                                                    dependent.var == "wash_decrease_reason" |
-                                                    dependent.var == "energy_decrease_reason") %>% 
-                                              filter(independent.var.value == "south west") %>%
-                                              arrange(desc(numbers)) %>%
-                                              group_by(dependent.var) %>%
-                                              slice(1:2)
+                                                      dependent.var == "cassava_decrease_reason" |
+                                                      dependent.var == "beans_decrease_reason" |
+                                                      dependent.var == "vegetables_decrease_reason" |
+                                                      dependent.var == "milk_decrease_reason" |
+                                                      dependent.var == "fish_decrease_reason" |
+                                                      dependent.var == "oil_decrease_reason" |
+                                                      dependent.var == "salt_decrease_reason" |
+                                                      dependent.var == "wash_decrease_reason" |
+                                                      dependent.var == "energy_decrease_reason") %>% 
+  filter(independent.var.value == "south west") %>%
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:2)
 ## Add ranking col
 top2_southwest_dec$rank <- vec2
 
 ## New var for datamerge and pivot wider
 top2_southwest_dec <- top2_southwest_dec %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-                                             select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 
 ## West Nile 
 top2_westnile_dec <- summary.stats.list %>% filter(dependent.var == "cereal_decrease_reason" |
-                                                    dependent.var == "cassava_decrease_reason" |
-                                                    dependent.var == "beans_decrease_reason" |
-                                                    dependent.var == "vegetables_decrease_reason" |
-                                                    dependent.var == "milk_decrease_reason" |
-                                                    dependent.var == "fish_decrease_reason" |
-                                                    dependent.var == "oil_decrease_reason" |
-                                                    dependent.var == "salt_decrease_reason" |
-                                                    dependent.var == "wash_decrease_reason" |
-                                                    dependent.var == "energy_decrease_reason") %>% 
-                                            filter(independent.var.value == "west nile") %>%
-                                            arrange(desc(numbers)) %>%
-                                            group_by(dependent.var) %>%
-                                            slice(1:2)
+                                                     dependent.var == "cassava_decrease_reason" |
+                                                     dependent.var == "beans_decrease_reason" |
+                                                     dependent.var == "vegetables_decrease_reason" |
+                                                     dependent.var == "milk_decrease_reason" |
+                                                     dependent.var == "fish_decrease_reason" |
+                                                     dependent.var == "oil_decrease_reason" |
+                                                     dependent.var == "salt_decrease_reason" |
+                                                     dependent.var == "wash_decrease_reason" |
+                                                     dependent.var == "energy_decrease_reason") %>% 
+  filter(independent.var.value == "west nile") %>%
+  arrange(desc(numbers)) %>%
+  group_by(dependent.var) %>%
+  slice(1:2)
 ## Add ranking col
 top2_westnile_dec$rank <- vec2
 
 ## New var for datamerge and pivot wider
 top2_westnile_dec <- top2_westnile_dec %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-                                            select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## Bind all together in one data merge-ready file, multiply by 100 and round up
@@ -509,35 +522,35 @@ top_analysis[, cols] <- top_analysis[, cols] * 100
 
 ## All markets
 non_perct_vars <- summary.stats.list %>% filter(dependent.var == "agents_number" |
-                                                dependent.var == "customer_number") %>%
-                                         filter(independent.var.value == "uganda")
-                                        
+                                                  dependent.var == "customer_number") %>%
+  filter(independent.var.value == "uganda")
+
 
 ## New var for datamerge and pivot wider
 non_perct_vars <- non_perct_vars %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>% ungroup() %>%
-                                      select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
+  select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
 
 
 ## South West
 non_perct_vars_southwest <- summary.stats.list %>% filter(dependent.var == "agents_number" |
-                                                          dependent.var == "customer_number") %>%
-                                                   filter(independent.var.value == "south west")
+                                                            dependent.var == "customer_number") %>%
+  filter(independent.var.value == "south west")
 
 
 ## New var for datamerge and pivot wider
 non_perct_vars_southwest <- non_perct_vars_southwest %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>% ungroup() %>%
-                                                         select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
+  select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
 
 
 ## West Nile
 non_perct_vars_westnile <- summary.stats.list %>% filter(dependent.var == "agents_number" |
-                                                         dependent.var == "customer_number") %>%
-                                                  filter(independent.var.value == "west nile")
+                                                           dependent.var == "customer_number") %>%
+  filter(independent.var.value == "west nile")
 
 
 ## New var for datamerge and pivot wider
 non_perct_vars_westnile <- non_perct_vars_westnile %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>% ungroup() %>%
-                                                       select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
+  select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
 
 
 ## Cbind the non-percent analysis
@@ -545,47 +558,47 @@ non_perct_vars_fin <- cbind(non_perct_vars, non_perct_vars_southwest, non_perct_
 
 ## All markets
 perct_vars <- summary.stats.list %>% filter(dependent.var == "mobile_accepted" |
-                                            dependent.var == "vendor_number" |
-                                            dependent.var == "vendors_change" |
-                                            dependent.var == "safety" |
-                                            dependent.var == "item_scarcity" |
-                                            dependent.var == "stock_runout") %>%
-                                    filter(independent.var.value == "uganda")
+                                              dependent.var == "vendor_number" |
+                                              dependent.var == "vendors_change" |
+                                              dependent.var == "safety" |
+                                              dependent.var == "item_scarcity" |
+                                              dependent.var == "stock_runout") %>%
+  filter(independent.var.value == "uganda")
 
 
 ## New var for datamerge and pivot wider
 perct_vars <- perct_vars %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>% ungroup() %>%
-                                    select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## South West
 perct_vars_southwest <- summary.stats.list %>% filter(dependent.var == "mobile_accepted" |
-                                                      dependent.var == "vendor_number" |
-                                                      dependent.var == "vendors_change" |
-                                                      dependent.var == "safety" |
-                                                      dependent.var == "item_scarcity" |
-                                                      dependent.var == "stock_runout") %>%
-                                               filter(independent.var.value == "south west")
+                                                        dependent.var == "vendor_number" |
+                                                        dependent.var == "vendors_change" |
+                                                        dependent.var == "safety" |
+                                                        dependent.var == "item_scarcity" |
+                                                        dependent.var == "stock_runout") %>%
+  filter(independent.var.value == "south west")
 
 
 ## New var for datamerge and pivot wider
 perct_vars_southwest <- perct_vars_southwest %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>% ungroup() %>%
-                                                 select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## West Nile
 perct_vars_westnile <- summary.stats.list %>% filter(dependent.var == "mobile_accepted" |
-                                                     dependent.var == "vendor_number" |
-                                                     dependent.var == "vendors_change" |
-                                                     dependent.var == "safety" |
-                                                     dependent.var == "item_scarcity" |
-                                                     dependent.var == "stock_runout") %>%
-                                              filter(independent.var.value == "west nile")
+                                                       dependent.var == "vendor_number" |
+                                                       dependent.var == "vendors_change" |
+                                                       dependent.var == "safety" |
+                                                       dependent.var == "item_scarcity" |
+                                                       dependent.var == "stock_runout") %>%
+  filter(independent.var.value == "west nile")
 
 
 ## New var for datamerge and pivot wider
 perct_vars_westnile <- perct_vars_westnile %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>% ungroup() %>%
-                                               select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+  select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## Bind all together in one data merge-ready file, multiply by 100 and round up
