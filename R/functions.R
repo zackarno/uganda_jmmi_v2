@@ -85,3 +85,12 @@ result_format_numbers <- function (result){
   
   return(result)
 }
+
+get_files_metadata<-function(folder_path){
+  fps<-list()
+  fps$fullpath<-list.files(folder_path, full.names = T)
+  fps$file_name<-list.files(folder_path)
+  fps$num_files<- length(fps$file_name)
+  fps
+}
+
