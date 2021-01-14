@@ -18,6 +18,9 @@ library(hypegrammaR)
 library(lubridate)
 
 # Sources
+
+
+## Save files
 source("./R/locations_list.R")
 source("./R/functions.R")
 
@@ -43,7 +46,7 @@ df<-fps$fullpath %>%
         x
        }
   )
-
+# df<-df %>% filter(month %in% c(3,9,10))
 # df_march 
 
 ### ANALYSIS
@@ -77,12 +80,12 @@ df$regions[df$district == "Bunyoro" ] <- "west nile"
 
 
 df<-df %>% 
-  mutate(month=lubridate::month(month, label=T, abbr=F),
+  mutate(month_lab=lubridate::month(month, label=T, abbr=F),
          # Add new market column that includes other markets
          market_final = ifelse(market == "Other",market_other,market),
          market= NULL,
          market_other=NULL) %>% 
-  filter(!is.na(month))
+  filter(!is.na(month_lab))
 
 
 # Move things around using moveme function and delete column not needed
@@ -126,9 +129,16 @@ item_prices <- item_prices %>% ungroup() %>% mutate(price_dodo = price_dodo/weig
 item_prices <- item_prices %>% select(-contains("weight"), -contains("Observed"))
 
 # Collection_order
-last_round_vec<- month(prev1_month_number,label=T, abbr=F)
-item_prices <- item_prices %>% mutate(collection_order = ifelse(month == this_round_vec, 4,
-                                                                ifelse(month == last_round_vec,3, 1)))
+# last_round_vec<- month(prev1_month_number,label=T, abbr=F)
+
+item_prices_last_2_and_march<-item_prices %>% 
+  filter(month %in% c(3, prev1_month_number:month_number))
+
+# collection order is used to split up settlement data in percent change
+item_prices_last_2_and_march <- item_prices_last_2_and_march %>%
+  mutate(collection_order = ifelse(month == month_number, 4,
+                                   ifelse(month == prev1_month_number,3, 1)),
+         month=month(month, label = T, abbr=F))
 
 
 
@@ -140,39 +150,39 @@ nan_inf_to_na <- function(x) {
 }  ## function to replace Inf and NaN with NAs for a cleaner output
 
 
-national_items <- item_prices %>%  
+national_items <- item_prices_last_2_and_march %>%  
   select(-uuid, -regions, -district, -settlement, -market_final) %>% 
   group_by(month, collection_order) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
-markets_items <- item_prices %>%  select(-uuid,-regions,-district) %>% 
+markets_items <- item_prices_last_2_and_march %>%  select(-uuid,-regions,-district) %>% 
   group_by(settlement,market_final,month) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>% 
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
-settlement_items <- item_prices %>%  select(-uuid,-market_final) %>% 
+settlement_items <- item_prices_last_2_and_march %>%  select(-uuid,-market_final) %>% 
   group_by(regions,district,settlement,month) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
-district_items <- item_prices %>%  select(-uuid,-settlement,-market_final) %>% 
+district_items <- item_prices_last_2_and_march %>%  select(-uuid,-settlement,-market_final) %>% 
   group_by(regions,district,month) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)  
 
 
-region_items <- item_prices %>%  select(-uuid,-market_final,-district,-settlement) %>% 
+region_items <- item_prices_last_2_and_march %>%  select(-uuid,-market_final,-district,-settlement) %>% 
   group_by(regions,month) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
 # Counts per area: region and settlements
-markets_per_region <- item_prices %>%  select(regions, month, market_final) %>% 
+markets_per_region <- item_prices_last_2_and_march %>%  select(regions, month, market_final) %>% 
   group_by(regions,month) %>% 
   summarise(num_market_assessed = n_distinct(market_final),
             num_assessed = length(month)) %>% 
@@ -180,13 +190,13 @@ markets_per_region <- item_prices %>%  select(regions, month, market_final) %>%
   select(level,num_market_assessed,num_assessed)
 
 
-settlements_per_region <- item_prices %>%  select(regions,settlement,month) %>% 
+settlements_per_region <- item_prices_last_2_and_march %>%  select(regions,settlement,month) %>% 
   group_by(regions,month) %>% 
   summarise(markets_numer = n_distinct(settlement))
 
 
 # Counts per area: nation wide
-markets_nationwide <- item_prices %>%  select(regions, month, market_final) %>% 
+markets_nationwide <- item_prices_last_2_and_march %>%  select(regions, month, market_final) %>% 
   group_by(month) %>% 
   summarise(num_market_assessed = n_distinct(market_final),
             num_assessed = length(month),
@@ -222,12 +232,14 @@ list_of_datasets_meb <- list("Settlement MEB" = meb_items,
                              "Percent change MEB Regional" = percent_change_meb_regional,
                              "Percent change MEB National" = percent_change_meb_national
 )
+write.xlsx(list_of_datasets_med, 
+           paste0("./outputs/",
+           butteR::date_file_prefix(),"_",this_round_vec,
+           "_UGA_JMMI_Means and percentage change.xlsx"))
 
-
-## Save files
-write.xlsx(list_of_datasets_med, paste0("./outputs/UGA_JMMI_Means and percentage change_",today,".xlsx"))
-
-write.xlsx(list_of_datasets_meb, paste0("outputs/UGA_JMMI_MEB and percentage change_",today,".xlsx"))
+write.xlsx(list_of_datasets_meb, 
+           paste0("./outputs/",
+                  butteR::date_file_prefix(),"_",this_round_vec,"_UGA_JMMI_MEB and percentage change.xlsx"))
 
 
 ## Market Functionality Page

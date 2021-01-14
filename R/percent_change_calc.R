@@ -8,8 +8,11 @@
 
 ### Split settlement medians dataset and remove settlements that do not match
 ## Create list of unique ID from last month and march
-last_round_unique <- unique(last_round$settlement)
-march_unique <- unique(df_march$settlement)
+
+
+last_round_unique <- df %>% filter(month==prev1_month_number) %>% pull(settlement) %>% unique()
+march_unique <- df %>% filter(month==3) %>% pull(settlement) %>% unique()
+
 
 ## Split settlement medians list into multiples
 settlement_items_split <- settlement_items %>% split.data.frame(.,factor(settlement_items$collection_order))

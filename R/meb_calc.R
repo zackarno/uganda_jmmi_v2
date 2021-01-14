@@ -6,10 +6,11 @@ march_mebs <- read.xlsx("./inputs/wfp_march_mebs.xlsx")
 
 
 ## Medians Calculation
-meb_items <- item_prices %>% select (-uuid, -market_final, -price_maize_g, -price_underwear, -price_charcoal,
-                                     -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price")) %>% 
-                            group_by(settlement, district, regions, month) %>% 
-                                                summarise_all(funs(median(., na.rm = TRUE))) %>% filter(month == this_round_vec | month == last_round_vec)
+meb_items <- item_prices %>%
+  select (-uuid, -market_final, -price_maize_g, -price_underwear, -price_charcoal,
+          -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price")) %>% 
+  group_by(settlement, district, regions, month) %>% 
+  summarise_all(funs(median(., na.rm = TRUE))) %>% filter(month %in% prev2_month_number:month_number)
 
 
 
@@ -25,8 +26,24 @@ meb_items <- meb_items %>% group_by(regions, month) %>%
 
 
 ## If NA put price from last round
-meb_items <- meb_items %>% group_by(regions) %>% mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+meb_items_for_prev_month_imputation<-meb_items %>% filter(month %in% prev2_month_number: prev1_month_number)
+meb_items_for_this_month_imputation<-meb_items %>% filter(month %in% prev1_month_number:month_number)
 
+meb_items_this_round <- meb_items_for_this_month_imputation %>%
+  group_by(regions) %>%
+  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
+  filter(month %in% month_number)
+
+meb_items_last_round <- meb_items_for_prev_month_imputation %>%
+  group_by(regions) %>%
+  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
+  filter(month %in% prev1_month_number)
+
+meb_items<- bind_rows(meb_items_this_round, meb_items_last_round)
+meb_items<- meb_items %>% 
+  mutate(collection_order = ifelse(month == month_number, 4,
+                                   ifelse(month == prev1_month_number,3, 1)),
+         month=month(month, label = T, abbr=F))
 
 ## Calculate MEB for food items
 meb_items$meb_maize_f <- meb_items$price_maize_f * 8.7 * 5
