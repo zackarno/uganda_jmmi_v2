@@ -10,7 +10,14 @@ meb_items <- item_prices %>%
   select (-uuid, -market_final, -price_maize_g, -price_underwear, -price_charcoal,
           -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price")) %>% 
   group_by(settlement, district, regions, month) %>% 
-  summarise_all(funs(median(., na.rm = TRUE))) %>% filter(month %in% prev2_month_number:month_number)
+  summarise_all(funs(median(., na.rm = TRUE))) %>%
+  filter(month %in% prev2_month_number:month_number)
+meb_items <- item_prices %>%
+  select (-uuid, -market_final, -price_maize_g, -price_underwear, -price_charcoal,
+          -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price")) %>% 
+  group_by(regions, district,settlement, month) %>% 
+  summarise_all(funs(median(., na.rm = TRUE))) %>%
+  filter(month %in% prev2_month_number:month_number)
 
 
 

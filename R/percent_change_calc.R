@@ -139,6 +139,8 @@ percent_change_national$regions <- "national"
 # Calculate percentage change between rounds - National
 meb_nat_pct_change_current_to_last <- meb_items_national %>% split.data.frame(., factor(meb_items_national$collection_order))
 
+
+
 change_meb_nat_current_to_last <- mapply(function(x, y){
   if(is.numeric(x)&is.numeric(y)){
     z <- (x-y)/y*100
@@ -174,6 +176,7 @@ change_national_last_round <- cbind(change_national_last_round, change_meb_nat_c
 
 # Calculate percentage change between rounds - Regional
 meb_reg_pct_change_current_to_last <- meb_items_regional %>% split.data.frame(., factor(meb_items_regional$collection_order))
+meb_reg_pct_change_current_to_last<-meb_reg_pct_change_current_to_last %>% purrr::map( .f = function(x)x %>% arrange(regions))
 
 change_meb_reg_current_to_last <- mapply(function(x, y){
   if(is.numeric(x)&is.numeric(y)){
@@ -209,6 +212,7 @@ percent_change_region <- purrr::reduce(reg_list, left_join)
 
 # Calculate percentage change between rounds - Settlement
 meb_set_pct_change_current_to_last <- meb_items %>% select(-district, -regions, -month) %>% split.data.frame(., factor(meb_items$collection_order))
+meb_set_pct_change_current_to_last<-meb_set_pct_change_current_to_last %>% purrr::map( .f = function(x)x %>% arrange(settlement))
 
 change_meb_set_current_to_last <- mapply(function(x, y){
   if(is.numeric(x)&is.numeric(y)){

@@ -23,6 +23,7 @@ library(lubridate)
 ## Save files
 source("./R/locations_list.R")
 source("./R/functions.R")
+source("R/extra_r11_cleaning.R")
 
 
 ## Round names - these need to be changed at every round
@@ -39,15 +40,13 @@ df<-fps$fullpath %>%
        function(x){
         x<- read_csv(x) %>% 
           mutate(
-            month=as.numeric(month),
+            # month=as.numeric(month),
             settlement= str_replace(settlement, "rhino", "rhino camp")
       )
         colnames(x)<- ifelse(str_detect(colnames(x), "uuid"),"uuid",colnames(x))
         x
        }
   )
-# df<-df %>% filter(month %in% c(3,9,10))
-# df_march 
 
 ### ANALYSIS
 
@@ -71,7 +70,7 @@ df$regions[df$sub_regions == "Acholi" | df$sub_regions == "West nile" ] <- "west
 
 df$regions[df$district == "Bunyoro" ] <- "west nile"
 
-
+# not necessary
 # Collection period
 # mymonths <- c("January","February","March",
 #               "April","May","June",
@@ -96,12 +95,8 @@ df <- df %>% select(c("month","country", "district", "regions", "settlement", "m
 
 # WFP/REACH decided to remove 'Less' from vendors_change data as it should not have been an option 
 if(this_round_vec=="November"){
-  df<-df %>% 
-    mutate(vendors_change= case_when(month=="November"&vendors_change=="Less"~NA_character_,
-                                     TRUE~vendors_change))  
-  
+  df<- extra_round11_cleaning(df)
 }
-
 
 ## Means Calculation
 # Prices columns
@@ -127,6 +122,8 @@ item_prices <- item_prices %>% ungroup() %>% mutate(price_dodo = price_dodo/weig
                                                     price_charcoal = price_charcoal/weight_charcoal)
 
 item_prices <- item_prices %>% select(-contains("weight"), -contains("Observed"))
+
+
 
 # Collection_order
 # last_round_vec<- month(prev1_month_number,label=T, abbr=F)
@@ -196,7 +193,8 @@ settlements_per_region <- item_prices_last_2_and_march %>%  select(regions,settl
 
 
 # Counts per area: nation wide
-markets_nationwide <- item_prices_last_2_and_march %>%  select(regions, month, market_final) %>% 
+markets_nationwide <- item_prices_last_2_and_march %>%
+  select(regions, month, market_final) %>% 
   group_by(month) %>% 
   summarise(num_market_assessed = n_distinct(market_final),
             num_assessed = length(month),
@@ -206,6 +204,7 @@ markets_nationwide <- item_prices_last_2_and_march %>%  select(regions, month, m
 
 
 data_merge_summary <- bind_rows(markets_nationwide,markets_per_region)
+
 
 # Calcualte MEBs
 source("./R/meb_calc.R")
@@ -254,7 +253,7 @@ kobo_tool <- load_questionnaire(this_round,
                                 choices.label.column.to.use = "label")
 
 
-k
+
 ## Prepare dataset for analysis
 df_analysis <- df %>% mutate(mobile_accepted = ifelse(grepl("mobile_money", payment_type), "yes", "no")) %>% filter(month == this_round_vec)
 

@@ -38,3 +38,5 @@ vignettes/*.pdf
 /inputs/*
 /R/archived/*
 /outputs/*
+/inputs/*
+/R/archived/* 
