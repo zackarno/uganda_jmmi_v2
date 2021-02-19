@@ -43,6 +43,7 @@ vignettes/*.pdf
 !outputs/.gitkeep
 !inputs/clean_data/.gitkeep
 !inputs/dap/.gitkeep
-!inuts/kobo/.gitkeep
+!inputs/kobo/.gitkeep
+!/**/.gitkeep
 
 *.zip
