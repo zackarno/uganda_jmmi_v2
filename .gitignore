@@ -41,5 +41,8 @@ vignettes/*.pdf
 /inputs/*
 /R/archived/*
 !outputs/.gitkeep
+!inputs/clean_data/.gitkeep
+!inputs/dap/.gitkeep
+!inuts/kobo/.gitkeep
 
 *.zip
