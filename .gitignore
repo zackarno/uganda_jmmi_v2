@@ -35,15 +35,19 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
-/inputs/*
+
 /R/archived/*
 /outputs/*
-/inputs/*
-/R/archived/*
 !outputs/.gitkeep
+/R/archived/*
+
+/inputs/clean_data/*
 !inputs/clean_data/.gitkeep
+/inputs/dap/*
 !inputs/dap/.gitkeep
+/inputs/kobo/*
 !inputs/kobo/.gitkeep
-!/**/.gitkeep
+/inputs/wfp_march_mebs.xlsx
+
 
 *.zip
