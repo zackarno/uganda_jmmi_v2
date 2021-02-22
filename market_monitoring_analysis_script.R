@@ -29,7 +29,16 @@ source("R/extra_r11_cleaning.R")
 year_of_assessment<- 2020
 month_number <- 12
 this_round_vec<-month(month_number,label=T, abbr=F)
-output_folder<- paste0(year_of_assessment, month_number,"_reach_uga_jimmi_outputs")
+output_folder<- paste0(year_of_assessment, 
+                       ifelse(month_number<10,
+                              paste0("0",(month_number)), 
+                              month_number),
+                       "_reach_uga_jimmi_outputs")
+
+if(!dir.exists(paste0("outputs/",output_folder))){
+  dir.create(paste0("outputs/",output_folder))
+}
+
 
 prev1_month_number<- month_number-1
 prev2_month_number<- month_number-2
