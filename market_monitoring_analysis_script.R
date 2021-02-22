@@ -39,7 +39,6 @@ if(!dir.exists(paste0("outputs/",output_folder))){
   dir.create(paste0("outputs/",output_folder))
 }
 
-
 prev1_month_number<- month_number-1
 prev2_month_number<- month_number-2
 
