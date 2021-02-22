@@ -1,5 +1,5 @@
 ## Uganda Market Monitoring - Update R Script
-## Last modified 2020-01-14
+## Last modified 2020-02-22
 
 ## this code cleans your environment
 # rm(list=ls())
@@ -26,8 +26,11 @@ source("R/extra_r11_cleaning.R")
 
 
 ## Round names - these need to be changed at every round
+year_of_assessment<- 2020
 month_number <- 12
 this_round_vec<-month(month_number,label=T, abbr=F)
+output_folder<- paste0(year_of_assessment, month_number,"_reach_uga_jimmi_outputs")
+
 prev1_month_number<- month_number-1
 prev2_month_number<- month_number-2
 
@@ -93,7 +96,7 @@ df$country <- "uganda"
 df <- df %>% select(c("month","country", "district", "regions", "settlement", "market_final"), everything())
 
 # WFP/REACH decided to remove 'Less' from vendors_change data as it should not have been an option 
-if(this_round_vec=="November"){
+if(month_number==11){
   df<- extra_round11_cleaning(df)
 }
 
@@ -232,12 +235,19 @@ list_of_datasets_meb <- list("Settlement MEB" = meb_items,
 )
 write.xlsx(list_of_datasets_med, 
            paste0("./outputs/",
-           butteR::date_file_prefix(),"_",this_round_vec,
-           "_UGA_JMMI_Means and percentage change.xlsx"))
+                  output_folder,"/",
+                  butteR::date_file_prefix(),"_",
+                  this_round_vec,
+                  "_UGA_JMMI_Means and percentage change.xlsx")
+           )
 
 write.xlsx(list_of_datasets_meb, 
            paste0("./outputs/",
-                  butteR::date_file_prefix(),"_",this_round_vec,"_UGA_JMMI_MEB and percentage change.xlsx"))
+                  output_folder,"/",
+                  butteR::date_file_prefix(),"_",
+                  this_round_vec,
+                  "_UGA_JMMI_MEB and percentage change.xlsx")
+           )
 
 
 ## Market Functionality Page
@@ -277,7 +287,10 @@ summary.stats.list <- analysis$results %>%
 summary.stats.list %>% 
   resultlist_summary_statistics_as_one_table() %>% 
   select(-se, -min, -max) %>%
-  map_to_file(paste0("./outputs/jmmi_analysis_",today,".csv"))
+  map_to_file(paste0("./outputs/",
+                     output_folder,"/",
+                     butteR::date_file_prefix(),"_",
+                     this_round_vec, "_jmmi_analysis.csv"))
 # resultlist_summary_statistics_as_one_table()
 
 ## Save html analysis file
@@ -288,8 +301,11 @@ hypegrammaR:::map_to_generic_hierarchical_html(resultlist = analysis,
                                                level = 2,
                                                questionnaire = kobo_tool,
                                                label_varnames = TRUE,
-                                               dir = "./outputs",
-                                               filename = paste0("html_analysis_jmmi_",today,".html"))
+                                               dir = paste0("./outputs/", output_folder),
+                                               filename = paste0(butteR::date_file_prefix(),
+                                                                 "_html_analysis_jmmi",
+                                                                 ".html")
+                                               )
 
 
 ## TOP 3 Analysis
@@ -320,7 +336,9 @@ top3_uganda <- summary.stats.list %>% filter(dependent.var == "payment_type" |
 top3_uganda$rank <- vec1
 
 ## New var for data merge and pivot wider
-top3_uganda <- top3_uganda %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
+top3_uganda <- top3_uganda %>% 
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% 
+  ungroup() %>%
   select(new_var, numbers, dependent.var.value) %>%
   pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
@@ -366,12 +384,11 @@ top3_westnile$rank <- vec1
 
 
 ## New var for datamerge and pivot wider
-top3_westnile <- top3_westnile %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
+top3_westnile <- top3_westnile %>% 
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>%
+  ungroup() %>%
   select(new_var, numbers, dependent.var.value) %>% 
   pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
-
-
-
 
 
 ## TOP 2 Analysis - Increase in price
@@ -395,8 +412,11 @@ top2_uganda <- summary.stats.list %>% filter(dependent.var == "cereal_increase_r
 top2_uganda$rank <- vec2
 
 ## New var for datamerge and pivot wider
-top2_uganda <- top2_uganda %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+top2_uganda <- top2_uganda %>% 
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% 
+  ungroup() %>%
+  select(dependent.var.value,  new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## South West
@@ -417,9 +437,13 @@ top2_southwest <- summary.stats.list %>% filter(dependent.var == "cereal_increas
 ## Add ranking col
 top2_southwest$rank <- vec2
 
+
 ## New var for datamerge and pivot wider
-top2_southwest <- top2_southwest %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+top2_southwest <- top2_southwest %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% 
+  ungroup() %>%
+  select(dependent.var.value,  new_var, numbers) %>%
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## West Nile
@@ -441,8 +465,11 @@ top2_westnile <- summary.stats.list %>% filter(dependent.var == "cereal_increase
 top2_westnile$rank <- vec2
 
 ## New var for datamerge and pivot wider
-top2_westnile <- top2_westnile %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+top2_westnile <- top2_westnile %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% 
+  ungroup() %>%
+  select(dependent.var.value,  new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 
@@ -469,7 +496,9 @@ top2_uganda_dec <- summary.stats.list %>% filter(dependent.var == "cereal_decrea
 top2_uganda_dec$rank <- vec2
 
 ## New var for datamerge and pivot wider
-top2_uganda_dec <- top2_uganda_dec %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
+top2_uganda_dec <- top2_uganda_dec %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>%
+  ungroup() %>%
   select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
@@ -518,8 +547,11 @@ top2_westnile_dec <- summary.stats.list %>% filter(dependent.var == "cereal_decr
 top2_westnile_dec$rank <- vec2
 
 ## New var for datamerge and pivot wider
-top2_westnile_dec <- top2_westnile_dec %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% ungroup() %>%
-  select(dependent.var.value,  new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+top2_westnile_dec <- top2_westnile_dec %>% 
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",rank)) %>% 
+  ungroup() %>%
+  select(dependent.var.value,  new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## Bind all together in one data merge-ready file, multiply by 100 and round up
@@ -594,8 +626,11 @@ perct_vars_southwest <- summary.stats.list %>% filter(dependent.var == "mobile_a
 
 
 ## New var for datamerge and pivot wider
-perct_vars_southwest <- perct_vars_southwest %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>% ungroup() %>%
-  select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+perct_vars_southwest <- perct_vars_southwest %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>%
+  ungroup() %>%
+  select(dependent.var.value, new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## West Nile
@@ -609,8 +644,11 @@ perct_vars_westnile <- summary.stats.list %>% filter(dependent.var == "mobile_ac
 
 
 ## New var for datamerge and pivot wider
-perct_vars_westnile <- perct_vars_westnile %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>% ungroup() %>%
-  select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+perct_vars_westnile <- perct_vars_westnile %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>%
+  ungroup() %>%
+  select(dependent.var.value, new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## Bind all together in one data merge-ready file, multiply by 100 and round up
@@ -637,8 +675,9 @@ data_merge_final[, cols] <- round(data_merge_final[, cols], 0)
 ## Save
 write.csv(data_merge_final, 
           paste0("./outputs/",
-                 this_round_vec,
+                 output_folder,
                  "/",
-                 butteR::date_file_prefix(),
+                 butteR::date_file_prefix(),"_",
+                 this_round_vec,
                  "_jmmi_data merge.csv"),
           na = "n/a", row.names = FALSE)
