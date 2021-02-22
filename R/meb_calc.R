@@ -22,19 +22,25 @@ meb_items <- item_prices %>%
 
 
 ## Calculate proximity: if a price is missing take the mean of settlement, or district, otherwise, regions
-meb_items <- meb_items %>% group_by(settlement, month) %>%
-  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
-
-meb_items <- meb_items %>% group_by(district, month) %>%
-  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
-
-meb_items <- meb_items %>% group_by(regions, month) %>%
-  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+## this was previous code it fails to preserve previous round meb values that match previous factsheet because
+## imputation was done using different data sets. FIXED in code below.
+# meb_items <- meb_items %>% 
+#   group_by(settlement, month) %>%
+#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+# 
+# meb_items <- meb_items %>% group_by(district, month) %>%
+#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+# 
+# meb_items <- meb_items %>% group_by(regions, month) %>%
+#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
 
 
 ## If NA put price from last round
-meb_items_for_prev_month_imputation<-meb_items %>% filter(month %in% prev2_month_number: prev1_month_number)
-meb_items_for_this_month_imputation<-meb_items %>% filter(month %in% prev1_month_number:month_number)
+meb_items_for_prev_month_imputation<-meb_items %>%
+  filter(month %in% prev2_month_number: prev1_month_number)
+
+meb_items_for_this_month_imputation<-meb_items %>%
+  filter(month %in% prev1_month_number:month_number)
 
 meb_items_this_round <- meb_items_for_this_month_imputation %>%
   group_by(regions) %>%

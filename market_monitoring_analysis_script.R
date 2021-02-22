@@ -19,7 +19,6 @@ library(lubridate)
 
 # Sources
 
-
 ## Save files
 source("./R/locations_list.R")
 source("./R/functions.R")
@@ -27,7 +26,7 @@ source("R/extra_r11_cleaning.R")
 
 
 ## Round names - these need to be changed at every round
-month_number <- 11
+month_number <- 12
 this_round_vec<-month(month_number,label=T, abbr=F)
 prev1_month_number<- month_number-1
 prev2_month_number<- month_number-2
@@ -247,15 +246,18 @@ write.xlsx(list_of_datasets_meb,
 dap <- load_analysisplan("./inputs/dap/jmmi_dap_v1.csv")
 
 
+this_round<-df %>% 
+  filter(month==12)
+
 kobo_tool <- load_questionnaire(this_round,
                                 questions = read.csv("./inputs/kobo/questions.csv"),
                                 choices = read.csv("./inputs/kobo/choices.csv"),
                                 choices.label.column.to.use = "label")
 
-
-
 ## Prepare dataset for analysis
-df_analysis <- df %>% mutate(mobile_accepted = ifelse(grepl("mobile_money", payment_type), "yes", "no")) %>% filter(month == this_round_vec)
+df_analysis <- df %>%
+  mutate(mobile_accepted = ifelse(grepl("mobile_money", payment_type), "yes", "no")) %>%
+  filter(month == 12)
 
 df_analysis$customer_number <- as.numeric(df_analysis$customer_number)
 df_analysis$agents_number <- as.numeric(df_analysis$agents_number)
@@ -273,10 +275,10 @@ summary.stats.list <- analysis$results %>%
 
 ## Save tabulated analysis file
 summary.stats.list %>% 
-  resultlist_summary_statistics_as_one_table %>% 
+  resultlist_summary_statistics_as_one_table() %>% 
   select(-se, -min, -max) %>%
   map_to_file(paste0("./outputs/jmmi_analysis_",today,".csv"))
-
+# resultlist_summary_statistics_as_one_table()
 
 ## Save html analysis file
 hypegrammaR:::map_to_generic_hierarchical_html(resultlist = analysis,
@@ -633,4 +635,10 @@ cols <- sapply(data_merge_final, is.numeric)
 data_merge_final[, cols] <- round(data_merge_final[, cols], 0)
 
 ## Save
-write.csv(data_merge_final, paste0("./outputs/jmmi_data merge_",today,".csv"), na = "n/a", row.names = FALSE)
+write.csv(data_merge_final, 
+          paste0("./outputs/",
+                 this_round_vec,
+                 "/",
+                 butteR::date_file_prefix(),
+                 "_jmmi_data merge.csv"),
+          na = "n/a", row.names = FALSE)

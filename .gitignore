@@ -48,6 +48,7 @@ vignettes/*.pdf
 /inputs/kobo/*
 !inputs/kobo/.gitkeep
 /inputs/wfp_march_mebs.xlsx
-
+/inputs/settlement_list.csv
+/inputs/Districts_list.csv
 
 *.zip
