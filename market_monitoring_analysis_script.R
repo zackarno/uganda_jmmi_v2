@@ -104,9 +104,8 @@ df$country <- "uganda"
 df <- df %>% select(c("month","country", "district", "regions", "settlement", "market_final"), everything())
 
 # WFP/REACH decided to remove 'Less' from vendors_change data as it should not have been an option 
-if(month_number==11){
-  df<- extra_round11_cleaning(df)
-}
+df<- extra_round11_cleaning(df)
+
 
 ## Means Calculation
 # Prices columns
@@ -189,7 +188,8 @@ region_items <- item_prices_last_2_and_march %>%  select(-uuid,-market_final,-di
 
 
 # Counts per area: region and settlements
-markets_per_region <- item_prices_last_2_and_march %>%  select(regions, month, market_final) %>% 
+markets_per_region <- item_prices_last_2_and_march %>% 
+  select(regions, month, market_final) %>% 
   group_by(regions,month) %>% 
   summarise(num_market_assessed = n_distinct(market_final),
             num_assessed = length(month)) %>% 
@@ -197,7 +197,8 @@ markets_per_region <- item_prices_last_2_and_march %>%  select(regions, month, m
   select(level,num_market_assessed,num_assessed)
 
 
-settlements_per_region <- item_prices_last_2_and_march %>%  select(regions,settlement,month) %>% 
+settlements_per_region <- item_prices_last_2_and_march %>% 
+  select(regions,settlement,month) %>% 
   group_by(regions,month) %>% 
   summarise(markets_numer = n_distinct(settlement))
 
@@ -689,3 +690,4 @@ write.csv(data_merge_final,
                  this_round_vec,
                  "_jmmi_data merge.csv"),
           na = "n/a", row.names = FALSE)
+

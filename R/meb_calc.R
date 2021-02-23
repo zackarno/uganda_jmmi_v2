@@ -6,33 +6,38 @@ march_mebs <- read.xlsx("./inputs/wfp_march_mebs.xlsx")
 
 
 ## Medians Calculation
-meb_items <- item_prices %>%
-  select (-uuid, -market_final, -price_maize_g, -price_underwear, -price_charcoal,
-          -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price")) %>% 
-  group_by(settlement, district, regions, month) %>% 
-  summarise_all(funs(median(., na.rm = TRUE))) %>%
-  filter(month %in% prev2_month_number:month_number)
+
+# meb_items <- item_prices %>%
+#   select (-uuid, -market_final, -price_maize_g, -price_underwear, -price_charcoal,
+#           -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price")) %>% 
+#   group_by(settlement, district, regions, month) %>% 
+#   summarise_all(funs(median(., na.rm = TRUE))) %>% 
+#   filter(month %in% prev2_month_number:month_number) 
+  
 meb_items <- item_prices %>%
   select (-uuid, -market_final, -price_maize_g, -price_underwear, -price_charcoal,
           -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price")) %>% 
   group_by(regions, district,settlement, month) %>% 
-  summarise_all(funs(median(., na.rm = TRUE))) %>%
-  filter(month %in% prev2_month_number:month_number)
+  summarise_all(funs(median(., na.rm = TRUE))) #%>% 
+  # filter(month %in% prev2_month_number:month_number) 
+  
+  
 
 
 
 ## Calculate proximity: if a price is missing take the mean of settlement, or district, otherwise, regions
 ## this was previous code it fails to preserve previous round meb values that match previous factsheet because
 ## imputation was done using different data sets. FIXED in code below.
-# meb_items <- meb_items %>% 
-#   group_by(settlement, month) %>%
-#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
-# 
-# meb_items <- meb_items %>% group_by(district, month) %>%
-#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
-# 
-# meb_items <- meb_items %>% group_by(regions, month) %>%
-#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+meb_items <- meb_items %>%
+  group_by(settlement, month) %>%
+  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+
+meb_items <- meb_items %>% group_by(district, month) %>%
+  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+
+meb_items <- meb_items %>% group_by(regions, month) %>%
+  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
+  ungroup()
 
 
 ## If NA put price from last round
