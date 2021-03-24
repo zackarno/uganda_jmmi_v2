@@ -26,8 +26,8 @@ source("R/extra_r11_cleaning.R")
 
 
 ## Round names - these need to be changed at every round
-year_of_assessment<- 2020
-month_number <- 12
+year_of_assessment<- 2021
+month_number <- 01
 this_round_vec<-month(month_number,label=T, abbr=F)
 output_folder<- paste0(year_of_assessment, 
                        ifelse(month_number<10,
@@ -39,8 +39,10 @@ if(!dir.exists(paste0("outputs/",output_folder))){
   dir.create(paste0("outputs/",output_folder))
 }
 
-prev1_month_number<- month_number-1
-prev2_month_number<- month_number-2
+date_constructed<-as_date(glue::glue("{year_of_assessment}-{month_number}-01"))
+
+prev1_month_number<- month(floor_date(date_constructed - months(1), "month"))
+prev2_month_number<- month(floor_date(date_constructed - months(2), "month"))
 
 fps<-get_files_metadata(folder_path = "inputs/clean_data")
 
@@ -48,11 +50,13 @@ df<-fps$fullpath %>%
   set_names(fps$file_name) %>% 
   map_dfr(
        function(x){
+         print(x)
         x<- read_csv(x) %>% 
           mutate(
             # month=as.numeric(month),
             settlement= str_replace(settlement, "rhino", "rhino camp")
-      )
+      ) %>% select(-any_of("today"))
+
         colnames(x)<- ifelse(str_detect(colnames(x), "uuid"),"uuid",colnames(x))
         x
        }
@@ -77,7 +81,6 @@ df <- df %>% select(month:district,F15Regions,DName2019, uuid) %>%
 
 df$regions <- "south west"
 df$regions[df$sub_regions == "Acholi" | df$sub_regions == "West nile" ] <- "west nile"
-
 df$regions[df$district == "Bunyoro" ] <- "west nile"
 
 # not necessary
