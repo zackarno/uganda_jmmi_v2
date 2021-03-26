@@ -43,6 +43,8 @@ rm(temp2)
 # Calculate percentage change between rounds
 # % Change this month vs last month
 pct_change_current_to_last <- pct_change_current_to_last %>% split.data.frame(.,factor(pct_change_current_to_last$collection_order))
+pct_change_current_to_last<-pct_change_current_to_last %>% 
+  map(~.x %>% arrange(settlement))
 
 change_settlement_last_round <- mapply(function(x, y){
   if(is.numeric(x)&is.numeric(y)){

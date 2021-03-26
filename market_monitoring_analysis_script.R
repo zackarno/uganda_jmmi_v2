@@ -16,7 +16,7 @@ library(tidyverse)
 library(data.table)
 library(hypegrammaR)
 library(lubridate)
-
+library(butteR)
 # Sources
 
 ## Save files
@@ -73,6 +73,8 @@ df<-fps$fullpath %>%
 
 df<-df %>% 
   filter(yrmo %in% yrmo_to_include)
+
+
 ### ANALYSIS
 
 # Creating one big dataframe with all the values from past rounds
@@ -243,6 +245,10 @@ source("./R/meb_calc.R")
 
 # Calculate % changes
 source("./R/percent_change_calc.R")
+source("./R/percent_change_calc_revised.R")
+al_percent_change_region<-percent_change_region
+al_change_settlement<-change_settlement
+
 
 ## Data exports 
 list_of_datasets_med <- list("Market mean price" = markets_items,
