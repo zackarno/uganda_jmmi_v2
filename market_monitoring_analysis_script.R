@@ -244,7 +244,7 @@ data_merge_summary <- bind_rows(markets_nationwide,markets_per_region)
 source("./R/meb_calc.R")
 
 # Calculate % changes
-source("./R/percent_change_calc.R")
+# source("./R/percent_change_calc.R")
 source("./R/percent_change_calc_revised.R")
 al_percent_change_region<-percent_change_region
 al_change_settlement<-change_settlement

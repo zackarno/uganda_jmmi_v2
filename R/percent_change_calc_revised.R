@@ -130,7 +130,7 @@ meb_items_pct_change<-meb_items_for_pct_change_list %>%
   }
   )
 
-meb_items_pct_change$regional
+
 # REGIONAL
 
 change_region_last_round<- left_join(pct_change_regional_national$regions,meb_items_pct_change$regions) %>% select(-ends_with("march"))
