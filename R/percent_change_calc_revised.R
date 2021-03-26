@@ -81,9 +81,6 @@ pct_change_regional_national<-item_list %>%
     pct_change_region<- pct_change_current_and_last %>% left_join(pct_change_current_and_base)
   }
   )
-
-
-
 # Calc % change in mebs at regional, natl, and settlement level -----------
 # same process as above, but involves a slightly different selection at the end.
 # therefore, I juts copied and pasted, but I should integrate into one map statement with if/else to accou
