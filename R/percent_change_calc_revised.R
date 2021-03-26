@@ -1,17 +1,6 @@
 ## Uganda Market Monitoring - MEB Calculations and Percentage Change Analysis
 ## Last modified 03/26/2021
 
-
-
-# custom function to rename columns in the same way that has been used for previous FS
-rename_cols_for_FS<- function(df,suffix){
-  colnames(df)[2:length(colnames(df))]<-colnames(df)[2:length(colnames(df))] %>% 
-    str_replace_all("price_","") %>% 
-    paste0(.,"_perct_",suffix)
-  return(df)
-  
-}
-
 ################################
 # Percentage Change Settlement #
 ################################

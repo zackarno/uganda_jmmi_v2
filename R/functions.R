@@ -94,3 +94,14 @@ get_files_metadata<-function(folder_path){
   fps
 }
 
+
+# custom function to rename columns in the same way that has been used for previous FS
+rename_cols_for_FS<- function(df,suffix){
+  colnames(df)[2:length(colnames(df))]<-colnames(df)[2:length(colnames(df))] %>% 
+    str_replace_all("price_","") %>% 
+    paste0(.,"_perct_",suffix)
+  return(df)
+  
+}
+
+
