@@ -1,13 +1,9 @@
 ## Uganda Market Monitoring - MEB Calculations and Percentage Change Analysis
-## Last modified 08/06/2020
+## Last modified 03/26/2021
 
 
-################################
-# Percentage Change Settlement #
-################################
 
-### Split settlement medians dataset and remove settlements that do not match
-## Create list of unique ID from last month and march
+# custom function to rename columns in the same way that has been used for previous FS
 rename_cols_for_FS<- function(df,suffix){
   colnames(df)[2:length(colnames(df))]<-colnames(df)[2:length(colnames(df))] %>% 
     str_replace_all("price_","") %>% 
@@ -16,68 +12,55 @@ rename_cols_for_FS<- function(df,suffix){
   
 }
 
+################################
+# Percentage Change Settlement #
+################################
 
+# getting unique settlements in each of the relevant rounds
 settlements_last_round <- df %>% filter(yrmo==yrmo_to_include[length(yrmo_to_include)-1]) %>% pull(settlement) %>% unique()
 settlements_baseline <- df %>% filter(yrmo== yrmo_to_include[1])%>% pull(settlement) %>% unique()
 settlements_this_round <- df %>% filter(yrmo==yrmo_to_include[length(yrmo_to_include)]) %>% pull(settlement) %>% unique()
 
-
+# we need to just consider settlements that match the current round in order calculate % changes in current round
 settlement_items<-settlement_items %>% 
   filter(settlement %in% settlements_this_round)
+
+# extract the yrmo combos of interest
 yrmo_current_and_last<- c(yrmo_to_include[length(yrmo_to_include)],yrmo_to_include[length(yrmo_to_include)-1]) %>% sort()
 yrmo_current_and_baseline<- c(yrmo_to_include[length(yrmo_to_include)],yrmo_to_include[1]) %>% sort()
 
+# create the two datasets necessary for % change calculations
 current_and_last<-settlement_items %>% 
   filter(yrmo %in% yrmo_current_and_last)
 current_and_baseline<-settlement_items %>% 
   filter(yrmo %in% yrmo_current_and_baseline)
 
+# calculate % change for each data set
+# current to last month
 pct_change_current_to_last<-current_and_last %>%
   pct_change_by_groups_all_numerics(group_var = settlement, time_id = yrmo)
-
-
-pct_change_current_and_last<-pct_change_current_to_last %>% rename_cols_for_FS("last_round")
-
-
-
-
-colnames(pct_change_current_to_last)[2:length(colnames(pct_change_current_to_last))] <- 
-  colnames(pct_change_current_to_last)[2:length(colnames(pct_change_current_to_last))] %>% 
-  str_replace_all("price_","") %>% 
-  paste0(.,"_perct_last_round")
-
-
-
-
-colnames(change_settlement_last_round)[2:length(colnames(change_settlement_last_round))] <- 
-  colnames(change_settlement_last_round)[2:length(colnames(change_settlement_last_round))] %>% 
-  str_replace_all("price_","") %>% 
-  paste0(.,"_perct_last_round")
-
-
+# current to baseline (march 2020)
 pct_change_current_to_baseline<-current_and_baseline %>%
   pct_change_by_groups_all_numerics(group_var = settlement, time_id = yrmo)
 
-colnames(pct_change_current_to_baseline)[2:length(colnames(pct_change_current_to_baseline))] <- 
-  colnames(pct_change_current_to_baseline)[2:length(colnames(pct_change_current_to_baseline))] %>% 
-  str_replace_all("price_","") %>% 
-  paste0(.,"_perct_march")
+# rename columns according to schema from previous rounds
+pct_change_current_and_last<-pct_change_current_to_last %>% rename_cols_for_FS("last_round")
+pct_change_current_to_baseline<-pct_change_current_to_baseline %>% rename_cols_for_FS("march")
 
 ## Merge the two dataset
 pct_change_settlement <- left_join(pct_change_current_to_last, pct_change_current_to_baseline, by = "settlement")
 
 
-#############################
-# Percentage Change Region #
-############################
 
+# Calculate % change at regional and national -----------------------------
+
+# since the process is the same, put them in a list so we can purrr through
 item_list<-list(region_items,national_items) %>%
   set_names(c("regions","national"))
 analysis_level<-c("regions", "national")
-region_items$regions
-item_list$regions$regions
-# Calculate percentage change between rounds
-# % Change this month vs last month
+
+# calculate % change between this round and base and this round and last round
+
 pct_change_regional_national<-item_list %>% 
   map2(analysis_level,function(x,y){
     if(y=="national"){
@@ -99,14 +82,16 @@ pct_change_regional_national<-item_list %>%
   }
   )
 
-# percent_change_national$regions <- "national" # this might bite me
 
 
-##############################
-#   Percentage Change MEBs   #
-##############################
-meb_items_for_pct_change_list<-list(meb_items_regional,meb_items_national,meb_items) %>% set_names(c("regions","national","settlement"))
+# Calc % change in mebs at regional, natl, and settlement level -----------
+# same process as above, but involves a slightly different selection at the end.
+# therefore, I juts copied and pasted, but I should integrate into one map statement with if/else to accou
+# for different selections
+meb_items_for_pct_change_list<-list(meb_items_regional,meb_items_national,meb_items) %>%
+  set_names(c("regions","national","settlement"))
 analysis_level<-c("regions", "national","settlement")
+
 meb_items_pct_change<-meb_items_for_pct_change_list %>% 
   map2(analysis_level,function(x,y){
     if(y=="national"){
@@ -130,31 +115,27 @@ meb_items_pct_change<-meb_items_for_pct_change_list %>%
   }
   )
 
-
-# REGIONAL
-
-change_region_last_round<- left_join(pct_change_regional_national$regions,meb_items_pct_change$regions) %>% select(-ends_with("march"))
-change_region_march<- left_join(pct_change_regional_national$regions,meb_items_pct_change$regions) %>% select(-ends_with("last_round"))
-# Add to relevant df
-
+# extract regional results in format/schema needed for downstream processes
+# combine different results, get price changes with meb price changes  (this round to last round)
+change_region_last_round<- left_join(pct_change_regional_national$regions,meb_items_pct_change$regions) %>%
+  select(-ends_with("march"))
+# combine different results, get price changes with meb price changes  (this round to last march 2020)
+change_region_march<- left_join(pct_change_regional_national$regions,meb_items_pct_change$regions) %>%
+  select(-ends_with("last_round"))
+# combine results
 reg_list <- list(pct_change_regional_national$regions, change_region_last_round, change_region_march)
-
 percent_change_region <- purrr::reduce(reg_list, left_join)
 
-# percent_change_meb_settlement <- left_join(change_meb_set_current_to_last_red, change_meb_set_march_red)
-
-# NATIONAL ... NOT SURE WHERE THIS GOES
+# SAME AS ABOVE, BUT NATL
 change_national_last_round <- left_join(pct_change_regional_national$national,
                                         meb_items_pct_change$national) %>% select(-ends_with("march"))
 change_national_march <- left_join(pct_change_regional_national$national,
                                    meb_items_pct_change$national) %>% select(-ends_with("last_round"))
 
-# SETTLEMENT LEVEL
+# SAME AS ABOVE, BUT SETTLEMENT LEVEL
 change_settlement_last_round <- left_join(pct_change_settlement, meb_items_pct_change$settlement) %>% select(-ends_with("march"))
 change_settlement_march <- left_join(change_settlement_march, meb_items_pct_change$settlement) %>% select(-ends_with("last_round"))
-
 set_list <- list(change_settlement, change_settlement_last_round, change_settlement_march)
-
 change_settlement <- purrr::reduce(set_list, left_join)
 
 
