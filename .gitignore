@@ -41,15 +41,17 @@ vignettes/*.pdf
 !outputs/.gitkeep
 /R/archived/*
 
-/inputs/clean_data/*
-!inputs/clean_data/.gitkeep
-/inputs/dap/*
-!inputs/dap/.gitkeep
-/inputs/kobo/* 
-!inputs/kobo/.gitkeep
-/inputs/wfp_march_mebs.xlsx
-/inputs/settlement_list.csv
-/inputs/Districts_list.csv
-/inputs/archived/*
+/inputs/*
+!inputs/.gitkeep
+#/inputs/clean_data/*
+#!inputs/clean_data/.gitkeep
+#/inputs/dap/*
+#!inputs/dap/.gitkeep
+#/inputs/kobo/* 
+#!inputs/kobo/.gitkeep
+#/inputs/wfp_march_mebs.xlsx
+#/inputs/settlement_list.csv
+#/inputs/Districts_list.csv
+#/inputs/archived/*
 
 *.zip
