@@ -16,7 +16,7 @@ library(tidyverse)
 library(data.table)
 library(hypegrammaR)
 library(lubridate)
-
+library(butteR)
 # Sources
 
 ## Save files
@@ -26,41 +26,54 @@ source("R/extra_r11_cleaning.R")
 
 
 ## Round names - these need to be changed at every round
-year_of_assessment<- 2021
-month_number <- 01
+fps<-get_files_metadata(folder_path = "inputs/clean_data")
+year_of_assessment<- as.numeric(str_sub(fps$file_name[length(fps$file_name)],start = 1,end = 4))
+month_number<- as.numeric(str_sub(fps$file_name[length(fps$file_name)],start = 5,end = 6))
+month_chr<- ifelse(month_number<10,paste0("0",month_number),month_number)
 this_round_vec<-month(month_number,label=T, abbr=F)
 output_folder<- paste0(year_of_assessment, 
-                       ifelse(month_number<10,
-                              paste0("0",(month_number)), 
-                              month_number),
+                       month_chr,
                        "_reach_uga_jimmi_outputs")
 
 if(!dir.exists(paste0("outputs/",output_folder))){
   dir.create(paste0("outputs/",output_folder))
 }
 
+yrmo_constructed<- glue::glue("{year_of_assessment}{month_chr}")
 date_constructed<-as_date(glue::glue("{year_of_assessment}-{month_number}-01"))
+
 
 prev1_month_number<- month(floor_date(date_constructed - months(1), "month"))
 prev2_month_number<- month(floor_date(date_constructed - months(2), "month"))
+# yrmos_to_include<- yr
 
-fps<-get_files_metadata(folder_path = "inputs/clean_data")
+yrmo<- str_sub(string= fps$file_name, start = 1,end = 6)
+yrmo_to_include<- c(yrmo[1], yrmo[length(yrmo)],yrmo[length(yrmo)-1],yrmo[length(yrmo)-2]) %>% sort()
 
 df<-fps$fullpath %>% 
   set_names(fps$file_name) %>% 
-  map_dfr(
-       function(x){
+  map2_dfr(.y = yrmo,
+       function(x,y){
          print(x)
         x<- read_csv(x) %>% 
           mutate(
             # month=as.numeric(month),
-            settlement= str_replace(settlement, "rhino", "rhino camp")
-      ) %>% select(-any_of("today"))
+            settlement= str_replace(settlement, "rhino", "rhino camp"),
+            yrmo= as.numeric(y),
+            yr= str_sub(string= yrmo, start = 1,end = 4) %>% as.numeric(),
+            mo= str_sub(string= yrmo, start = 5,end = 6) %>% as.numeric()
+            
+            
+      ) %>% select(-any_of("today"),yrmo)
 
         colnames(x)<- ifelse(str_detect(colnames(x), "uuid"),"uuid",colnames(x))
         x
        }
   )
+
+df<-df %>% 
+  filter(yrmo %in% yrmo_to_include)
+
 
 ### ANALYSIS
 
@@ -79,20 +92,18 @@ df <- df %>% select(month:district,F15Regions,DName2019, uuid) %>%
   mutate(sub_regions = str_to_sentence(F15Regions))
 
 
+# this is actually incorrect assignment of regions -- need to keep
+# so that we get the same values for previous month, but will fix for january
+# and eventually phase out
+
 df$regions <- "south west"
 df$regions[df$sub_regions == "Acholi" | df$sub_regions == "West nile" ] <- "west nile"
 df$regions[df$district == "Bunyoro" ] <- "west nile"
 
-# not necessary
-# Collection period
-# mymonths <- c("January","February","March",
-#               "April","May","June",
-#               "July","August","September",
-#               "October","November","December")
 
 
 df<-df %>% 
-  mutate(month_lab=lubridate::month(month, label=T, abbr=F),
+  mutate(month_lab=lubridate::month(mo, label=T, abbr=F),
          # Add new market column that includes other markets
          market_final = ifelse(market == "Other",market_other,market),
          market= NULL,
@@ -106,13 +117,14 @@ df$country <- "uganda"
 
 df <- df %>% select(c("month","country", "district", "regions", "settlement", "market_final"), everything())
 
+
 # WFP/REACH decided to remove 'Less' from vendors_change data as it should not have been an option 
-df<- extra_round11_cleaning(df)
+df<- month_specific_cleaning(df)
 
 
 ## Means Calculation
 # Prices columns
-item_prices <- df %>%  select(uuid,month,
+item_prices <- df %>%  select(uuid,yrmo,month,
                               regions,district,
                               settlement,market_final,
                               contains("price"), starts_with("weight_"), -starts_with("price_increase"), -starts_with("price_decrease"),
@@ -140,16 +152,24 @@ item_prices <- item_prices %>% select(-contains("weight"), -contains("Observed")
 # Collection_order
 # last_round_vec<- month(prev1_month_number,label=T, abbr=F)
 
-item_prices_last_2_and_march<-item_prices %>% 
-  filter(month %in% c(3, prev1_month_number:month_number))
+# for meb calculations we need to include last 2 months plus march
+# item_prices_last_2_and_march<-item_prices %>% 
+#   filter(month %in% c(3, prev1_month_number:month_number))
+# 
+# # collection order is used to split up settlement data in percent change
+# item_prices_last_2_and_march <- item_prices_last_2_and_march %>%
+#   mutate(collection_order = ifelse(month == month_number, 4,
+#                                    ifelse(month == prev1_month_number,3, 1)),
+#          month=month(month, label = T, abbr=F))
 
-# collection order is used to split up settlement data in percent change
-item_prices_last_2_and_march <- item_prices_last_2_and_march %>%
+
+
+# for pct change we only want this month, last month, and march
+item_prices_for_pct_change<- item_prices %>% 
+  filter(yrmo %in% c(yrmo_to_include[1],yrmo_to_include[length(yrmo_to_include)],yrmo_to_include[length(yrmo_to_include)-1])) %>% 
   mutate(collection_order = ifelse(month == month_number, 4,
                                    ifelse(month == prev1_month_number,3, 1)),
          month=month(month, label = T, abbr=F))
-
-
 
 # Mean prices
 nan_inf_to_na <- function(x) {
@@ -159,39 +179,39 @@ nan_inf_to_na <- function(x) {
 }  ## function to replace Inf and NaN with NAs for a cleaner output
 
 
-national_items <- item_prices_last_2_and_march %>%  
+national_items <- item_prices_for_pct_change %>%  
   select(-uuid, -regions, -district, -settlement, -market_final) %>% 
   group_by(month, collection_order) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
-markets_items <- item_prices_last_2_and_march %>%  select(-uuid,-regions,-district) %>% 
+markets_items <- item_prices_for_pct_change %>%  select(-uuid,-regions,-district) %>% 
   group_by(settlement,market_final,month) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>% 
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
-settlement_items <- item_prices_last_2_and_march %>%  select(-uuid,-market_final) %>% 
+settlement_items <- item_prices_for_pct_change %>%  select(-uuid,-market_final) %>% 
   group_by(regions,district,settlement,month) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
-district_items <- item_prices_last_2_and_march %>%  select(-uuid,-settlement,-market_final) %>% 
+district_items <- item_prices_for_pct_change %>%  select(-uuid,-settlement,-market_final) %>% 
   group_by(regions,district,month) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)  
 
 
-region_items <- item_prices_last_2_and_march %>%  select(-uuid,-market_final,-district,-settlement) %>% 
+region_items <- item_prices_for_pct_change %>%  select(-uuid,-market_final,-district,-settlement) %>% 
   group_by(regions,month) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
 # Counts per area: region and settlements
-markets_per_region <- item_prices_last_2_and_march %>% 
+markets_per_region <- item_prices_for_pct_change %>% 
   select(regions, month, market_final) %>% 
   group_by(regions,month) %>% 
   summarise(num_market_assessed = n_distinct(market_final),
@@ -200,14 +220,14 @@ markets_per_region <- item_prices_last_2_and_march %>%
   select(level,num_market_assessed,num_assessed)
 
 
-settlements_per_region <- item_prices_last_2_and_march %>% 
+settlements_per_region <- item_prices_for_pct_change %>% 
   select(regions,settlement,month) %>% 
   group_by(regions,month) %>% 
   summarise(markets_numer = n_distinct(settlement))
 
 
 # Counts per area: nation wide
-markets_nationwide <- item_prices_last_2_and_march %>%
+markets_nationwide <- item_prices_for_pct_change %>%
   select(regions, month, market_final) %>% 
   group_by(month) %>% 
   summarise(num_market_assessed = n_distinct(market_final),
@@ -224,7 +244,11 @@ data_merge_summary <- bind_rows(markets_nationwide,markets_per_region)
 source("./R/meb_calc.R")
 
 # Calculate % changes
-source("./R/percent_change_calc.R")
+# source("./R/percent_change_calc.R")
+source("./R/percent_change_calc_revised.R")
+# al_percent_change_region<-percent_change_region
+# al_change_settlement<-change_settlement
+
 
 ## Data exports 
 list_of_datasets_med <- list("Market mean price" = markets_items,
@@ -241,9 +265,9 @@ list_of_datasets_med <- list("Market mean price" = markets_items,
 list_of_datasets_meb <- list("Settlement MEB" = meb_items,
                              "Regional MEB" = meb_items_regional,
                              "National MEB" = meb_items_national,
-                             "Percent change MEB Settlment" = percent_change_meb_settlement,
-                             "Percent change MEB Regional" = percent_change_meb_regional,
-                             "Percent change MEB National" = percent_change_meb_national
+                             "Percent change MEB Settlment" = meb_items_pct_change$settlement,
+                             "Percent change MEB Regional" = meb_items_pct_change$regions,
+                             "Percent change MEB National" = meb_items_pct_change$national
 )
 write.xlsx(list_of_datasets_med, 
            paste0("./outputs/",
@@ -269,17 +293,19 @@ dap <- load_analysisplan("./inputs/dap/jmmi_dap_v1.csv")
 
 
 this_round<-df %>% 
-  filter(month==12)
+  filter(month==01)
 
 kobo_tool <- load_questionnaire(this_round,
                                 questions = read.csv("./inputs/kobo/questions.csv"),
                                 choices = read.csv("./inputs/kobo/choices.csv"),
                                 choices.label.column.to.use = "label")
 
+
 ## Prepare dataset for analysis
 df_analysis <- df %>%
   mutate(mobile_accepted = ifelse(grepl("mobile_money", payment_type), "yes", "no")) %>%
-  filter(month == 12)
+  filter(yrmo == yrmo_constructed)
+
 
 df_analysis$customer_number <- as.numeric(df_analysis$customer_number)
 df_analysis$agents_number <- as.numeric(df_analysis$agents_number)
@@ -686,7 +712,7 @@ data_merge_final[, cols] <- round(data_merge_final[, cols], 0)
 
 ## Save
 write.csv(data_merge_final, 
-          paste0("./outputs/",
+          paste0("outputs/",
                  output_folder,
                  "/",
                  butteR::date_file_prefix(),"_",
