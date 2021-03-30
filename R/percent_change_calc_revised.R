@@ -117,11 +117,13 @@ change_national_last_round <- left_join(pct_change_regional_national$national,
                                         meb_items_pct_change$national) %>% select(-ends_with("march"))
 change_national_march <- left_join(pct_change_regional_national$national,
                                    meb_items_pct_change$national) %>% select(-ends_with("last_round"))
+percent_change_national<- left_join(change_national_last_round,change_national_march)
 
-# SAME AS ABOVE, BUT SETTLEMENT LEVEL
+# SAME AS ABOVE, BUT SETTLEMENT LEVEL7
+
 change_settlement_last_round <- left_join(pct_change_settlement, meb_items_pct_change$settlement) %>% select(-ends_with("march"))
-change_settlement_march <- left_join(change_settlement_march, meb_items_pct_change$settlement) %>% select(-ends_with("last_round"))
-set_list <- list(change_settlement, change_settlement_last_round, change_settlement_march)
+change_settlement_march <- left_join(pct_change_settlement, meb_items_pct_change$settlement) %>% select(-ends_with("last_round"))
+set_list <- list( change_settlement_last_round, change_settlement_march)
 change_settlement <- purrr::reduce(set_list, left_join)
 
 

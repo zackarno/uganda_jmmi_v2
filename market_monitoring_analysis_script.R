@@ -153,14 +153,14 @@ item_prices <- item_prices %>% select(-contains("weight"), -contains("Observed")
 # last_round_vec<- month(prev1_month_number,label=T, abbr=F)
 
 # for meb calculations we need to include last 2 months plus march
-item_prices_last_2_and_march<-item_prices %>% 
-  filter(month %in% c(3, prev1_month_number:month_number))
-
-# collection order is used to split up settlement data in percent change
-item_prices_last_2_and_march <- item_prices_last_2_and_march %>%
-  mutate(collection_order = ifelse(month == month_number, 4,
-                                   ifelse(month == prev1_month_number,3, 1)),
-         month=month(month, label = T, abbr=F))
+# item_prices_last_2_and_march<-item_prices %>% 
+#   filter(month %in% c(3, prev1_month_number:month_number))
+# 
+# # collection order is used to split up settlement data in percent change
+# item_prices_last_2_and_march <- item_prices_last_2_and_march %>%
+#   mutate(collection_order = ifelse(month == month_number, 4,
+#                                    ifelse(month == prev1_month_number,3, 1)),
+#          month=month(month, label = T, abbr=F))
 
 
 
@@ -246,8 +246,8 @@ source("./R/meb_calc.R")
 # Calculate % changes
 # source("./R/percent_change_calc.R")
 source("./R/percent_change_calc_revised.R")
-al_percent_change_region<-percent_change_region
-al_change_settlement<-change_settlement
+# al_percent_change_region<-percent_change_region
+# al_change_settlement<-change_settlement
 
 
 ## Data exports 
@@ -265,9 +265,9 @@ list_of_datasets_med <- list("Market mean price" = markets_items,
 list_of_datasets_meb <- list("Settlement MEB" = meb_items,
                              "Regional MEB" = meb_items_regional,
                              "National MEB" = meb_items_national,
-                             "Percent change MEB Settlment" = percent_change_meb_settlement,
-                             "Percent change MEB Regional" = percent_change_meb_regional,
-                             "Percent change MEB National" = percent_change_meb_national
+                             "Percent change MEB Settlment" = meb_items_pct_change$settlement,
+                             "Percent change MEB Regional" = meb_items_pct_change$regions,
+                             "Percent change MEB National" = meb_items_pct_change$national
 )
 write.xlsx(list_of_datasets_med, 
            paste0("./outputs/",
