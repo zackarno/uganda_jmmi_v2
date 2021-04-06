@@ -27,10 +27,10 @@ current_and_baseline<-settlement_items %>%
 # calculate % change for each data set
 # current to last month
 pct_change_current_to_last<-current_and_last %>%
-  pct_change_by_groups_all_numerics(group_var = settlement, time_id = yrmo)
+  pct_change_by_groups_all_numerics(group_var = "settlement", time_id = "yrmo")
 # current to baseline (march 2020)
 pct_change_current_to_baseline<-current_and_baseline %>%
-  pct_change_by_groups_all_numerics(group_var = settlement, time_id = yrmo)
+  pct_change_by_groups_all_numerics(group_var = "settlement", time_id = "yrmo")
 
 # rename columns according to schema from previous rounds
 pct_change_current_and_last<-pct_change_current_to_last %>% rename_cols_for_FS("last_round")
@@ -62,9 +62,9 @@ pct_change_regional_national<-item_list %>%
       filter(yrmo %in% yrmo_current_and_baseline)
       
     pct_change_current_and_last<- current_and_last %>%
-      pct_change_by_groups_all_numerics(group_var = !!sym(y), time_id = yrmo)
+      pct_change_by_groups_all_numerics(group_var = y, time_id = "yrmo")
     pct_change_current_and_base<- current_and_base %>%
-      pct_change_by_groups_all_numerics(group_var = !!sym(y), time_id = yrmo)
+      pct_change_by_groups_all_numerics(group_var = y, time_id = "yrmo")
     pct_change_current_and_last<-pct_change_current_and_last %>% rename_cols_for_FS("last_round")
     pct_change_current_and_base<-pct_change_current_and_base %>% rename_cols_for_FS("march")
     pct_change_region<- pct_change_current_and_last %>% left_join(pct_change_current_and_base)
@@ -90,9 +90,9 @@ meb_items_pct_change<-meb_items_for_pct_change_list %>%
       filter(yrmo %in% yrmo_current_and_baseline)
     
     pct_change_current_and_last<- current_and_last %>%
-      pct_change_by_groups_all_numerics(group_var = !!sym(y), time_id = yrmo)
+      pct_change_by_groups_all_numerics(group_var = y, time_id = "yrmo")
     pct_change_current_and_base<- current_and_base %>%
-      pct_change_by_groups_all_numerics(group_var = !!sym(y), time_id = yrmo)
+      pct_change_by_groups_all_numerics(group_var = y, time_id = "yrmo")
     pct_change_current_and_last<-pct_change_current_and_last %>% rename_cols_for_FS("last_round")
     pct_change_current_and_base<-pct_change_current_and_base %>% rename_cols_for_FS("march")
     pct_change_region<- pct_change_current_and_last %>% 
