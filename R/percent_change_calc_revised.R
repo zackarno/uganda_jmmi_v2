@@ -10,6 +10,7 @@ settlements_last_round <- df %>% filter(yrmo==yrmo_to_include[length(yrmo_to_inc
 settlements_baseline <- df %>% filter(yrmo== yrmo_to_include[1])%>% pull(settlement) %>% unique()
 settlements_this_round <- df %>% filter(yrmo==yrmo_to_include[length(yrmo_to_include)]) %>% pull(settlement) %>% unique()
 
+tolower(settlements_this_round) [!tolower(settlements_this_round) %in%settlements_baseline]
 # we need to just consider settlements that match the current round in order calculate % changes in current round
 settlement_items<-settlement_items %>% 
   filter(settlement %in% settlements_this_round)
@@ -26,6 +27,7 @@ current_and_baseline<-settlement_items %>%
 
 # calculate % change for each data set
 # current to last month
+debugonce(pct_change_by_groups_all_numerics)
 pct_change_current_to_last<-current_and_last %>%
   pct_change_by_groups_all_numerics(group_var = "settlement", time_id = "yrmo")
 # current to baseline (march 2020)
