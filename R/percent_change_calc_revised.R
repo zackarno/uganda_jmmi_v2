@@ -10,7 +10,7 @@ settlements_last_round <- df %>% filter(yrmo==yrmo_to_include[length(yrmo_to_inc
 settlements_baseline <- df %>% filter(yrmo== yrmo_to_include[1])%>% pull(settlement) %>% unique()
 settlements_this_round <- df %>% filter(yrmo==yrmo_to_include[length(yrmo_to_include)]) %>% pull(settlement) %>% unique()
 
-tolower(settlements_this_round) [!tolower(settlements_this_round) %in%settlements_baseline]
+# tolower(settlements_this_round) [!tolower(settlements_this_round) %in%tolower(settlements_baseline)]
 # we need to just consider settlements that match the current round in order calculate % changes in current round
 settlement_items<-settlement_items %>% 
   filter(settlement %in% settlements_this_round)
@@ -27,7 +27,7 @@ current_and_baseline<-settlement_items %>%
 
 # calculate % change for each data set
 # current to last month
-debugonce(pct_change_by_groups_all_numerics)
+# debugonce(pct_change_by_groups_all_numerics)
 pct_change_current_to_last<-current_and_last %>%
   pct_change_by_groups_all_numerics(group_var = "settlement", time_id = "yrmo")
 # current to baseline (march 2020)
@@ -82,24 +82,30 @@ analysis_level<-c("regions", "national","settlement")
 
 meb_items_pct_change<-meb_items_for_pct_change_list %>% 
   map2(analysis_level,function(x,y){
+    print(analysis_level)
     if(y=="national"){
       x<- x %>%
         mutate(national="national")
     }
+    
     current_and_last<-x%>% 
       filter(yrmo %in% yrmo_current_and_last)
     current_and_base<-x %>% 
       filter(yrmo %in% yrmo_current_and_baseline)
     
+    
     pct_change_current_and_last<- current_and_last %>%
       pct_change_by_groups_all_numerics(group_var = y, time_id = "yrmo")
+    
+    
     pct_change_current_and_base<- current_and_base %>%
       pct_change_by_groups_all_numerics(group_var = y, time_id = "yrmo")
     pct_change_current_and_last<-pct_change_current_and_last %>% rename_cols_for_FS("last_round")
     pct_change_current_and_base<-pct_change_current_and_base %>% rename_cols_for_FS("march")
+    
     pct_change_region<- pct_change_current_and_last %>% 
       left_join(pct_change_current_and_base) %>% 
-      select(contains("food"), contains("full"))
+      select(y,contains("food"), contains("full"))
   }
   )
 

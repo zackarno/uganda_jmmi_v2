@@ -1,8 +1,7 @@
 ## Uganda Market Monitoring - Update R Script
-## Last modified 2020-02-22
+## Last modified 2021-04-08
 
-## this code cleans your environment
-# rm(list=ls())
+#****** for 202103 round -- fix this "meb_items_last_round" to new aggregation scheme. 
 
 today <- Sys.Date()
 
@@ -23,6 +22,7 @@ library(butteR)
 source("./R/locations_list.R")
 source("./R/functions.R")
 source("R/extra_r11_cleaning.R")
+source("R/pct_change_function.R")
 
 
 ## Round names - these need to be changed at every round
@@ -290,22 +290,19 @@ write.xlsx(list_of_datasets_meb,
 
 ### Load data analysis plan and questionnaire
 dap <- load_analysisplan("./inputs/dap/jmmi_dap_v1.csv")
+# dap %>% View()
 
 
-this_round<-df %>% 
-  filter(month==01)
-
-kobo_tool <- load_questionnaire(this_round,
+df_analysis <- df %>%
+  mutate(mobile_accepted = ifelse(grepl("mobile_money", payment_type), "yes", "no")) %>%
+  filter(yrmo == yrmo_constructed)
+kobo_tool <- load_questionnaire(df_analysis,
                                 questions = read.csv("./inputs/kobo/questions.csv"),
                                 choices = read.csv("./inputs/kobo/choices.csv"),
                                 choices.label.column.to.use = "label")
 
 
 ## Prepare dataset for analysis
-df_analysis <- df %>%
-  mutate(mobile_accepted = ifelse(grepl("mobile_money", payment_type), "yes", "no")) %>%
-  filter(yrmo == yrmo_constructed)
-
 
 df_analysis$customer_number <- as.numeric(df_analysis$customer_number)
 df_analysis$agents_number <- as.numeric(df_analysis$agents_number)
@@ -317,6 +314,7 @@ analysis <- from_analysisplan_map_to_output(data = df_analysis,
                                             weighting = NULL,
                                             questionnaire = kobo_tool)
 ## SUMMARY STATS LIST ##
+
 summary.stats.list <- analysis$results %>% 
   lapply(function(x){map_to_labeled(result = x, questionnaire = kobo_tool)})
 
@@ -609,30 +607,39 @@ non_perct_vars <- summary.stats.list %>% filter(dependent.var == "agents_number"
 
 
 ## New var for datamerge and pivot wider
-non_perct_vars <- non_perct_vars %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>% ungroup() %>%
-  select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
+non_perct_vars <- non_perct_vars %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>%
+  ungroup() %>%
+  select(new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers))
 
 
 ## South West
-non_perct_vars_southwest <- summary.stats.list %>% filter(dependent.var == "agents_number" |
-                                                            dependent.var == "customer_number") %>%
+non_perct_vars_southwest <- summary.stats.list %>% 
+  filter(dependent.var == "agents_number" |dependent.var == "customer_number") %>%
   filter(independent.var.value == "south west")
 
 
 ## New var for datamerge and pivot wider
-non_perct_vars_southwest <- non_perct_vars_southwest %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>% ungroup() %>%
-  select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
+non_perct_vars_southwest <- non_perct_vars_southwest %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>% 
+  ungroup() %>%
+  select(new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers))
 
 
 ## West Nile
-non_perct_vars_westnile <- summary.stats.list %>% filter(dependent.var == "agents_number" |
-                                                           dependent.var == "customer_number") %>%
+non_perct_vars_westnile <- summary.stats.list %>% 
+  filter(dependent.var == "agents_number" |dependent.var == "customer_number") %>%
   filter(independent.var.value == "west nile")
 
 
 ## New var for datamerge and pivot wider
-non_perct_vars_westnile <- non_perct_vars_westnile %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>% ungroup() %>%
-  select(new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers))
+non_perct_vars_westnile <- non_perct_vars_westnile %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var)) %>% 
+  ungroup() %>%
+  select(new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers))
 
 
 ## Cbind the non-percent analysis
@@ -647,10 +654,14 @@ perct_vars <- summary.stats.list %>% filter(dependent.var == "mobile_accepted" |
                                               dependent.var == "stock_runout") %>%
   filter(independent.var.value == "uganda")
 
+# perct_vars %>% View()
 
 ## New var for datamerge and pivot wider
-perct_vars <- perct_vars %>% mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>% ungroup() %>%
-  select(dependent.var.value, new_var, numbers) %>% pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
+perct_vars <- perct_vars %>%
+  mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>%
+  ungroup() %>%
+  select(dependent.var.value, new_var, numbers) %>% 
+  pivot_wider(names_from = new_var, values_from = c(numbers, dependent.var.value))
 
 
 ## South West
@@ -683,6 +694,7 @@ perct_vars_westnile <- summary.stats.list %>% filter(dependent.var == "mobile_ac
 
 ## New var for datamerge and pivot wider
 perct_vars_westnile <- perct_vars_westnile %>%
+  filter(!is.na(dependent.var.value)) %>%
   mutate(new_var = paste0(independent.var.value,"_",dependent.var,"_",dependent.var.value)) %>%
   ungroup() %>%
   select(dependent.var.value, new_var, numbers) %>% 
@@ -710,13 +722,17 @@ data_merge_final <- cbind(top_analysis,
 cols <- sapply(data_merge_final, is.numeric)
 data_merge_final[, cols] <- round(data_merge_final[, cols], 0)
 
+data_merge_final %>% class()
 ## Save
-write.csv(data_merge_final, 
-          paste0("outputs/",
-                 output_folder,
-                 "/",
-                 butteR::date_file_prefix(),"_",
-                 this_round_vec,
-                 "_jmmi_data merge.csv"),
-          na = "n/a", row.names = FALSE)
 
+write_csv(
+  data_merge_final,
+  paste0("outputs/",
+         output_folder,
+         "/",
+         butteR::date_file_prefix(),"_",
+         this_round_vec,
+         "_jmmi_data merge.csv"), na= "n/a"
+  
+  
+)
