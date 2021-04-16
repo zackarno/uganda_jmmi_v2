@@ -38,8 +38,9 @@ pct_change_current_to_baseline<-current_and_baseline %>%
 pct_change_current_and_last<-pct_change_current_to_last %>% rename_cols_for_FS("last_round")
 pct_change_current_to_baseline<-pct_change_current_to_baseline %>% rename_cols_for_FS("march")
 
+
 ## Merge the two dataset
-pct_change_settlement <- left_join(pct_change_current_to_last, pct_change_current_to_baseline, by = "settlement")
+pct_change_settlement <- left_join(pct_change_current_and_last, pct_change_current_to_baseline, by = "settlement")
 
 
 
