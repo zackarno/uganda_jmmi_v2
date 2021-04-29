@@ -2,7 +2,8 @@
 ## Last modified 16/06/2020
 
 ## Load March price
-march_mebs <- read.xlsx("./inputs/wfp_march_mebs.xlsx")
+march_mebs <- read.xlsx("./inputs/wfp_march_mebs.xlsx") %>% 
+  mutate(yrmo="202003")
 
 
 ## Medians Calculation
@@ -16,52 +17,89 @@ march_mebs <- read.xlsx("./inputs/wfp_march_mebs.xlsx")
   
 meb_items <- item_prices %>%
   select (-uuid, -market_final, -price_maize_g, -price_underwear, -price_charcoal,
-          -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price")) %>% 
-  group_by(regions, district,settlement, month) %>% 
+          -price_pads, -price_DAP, -price_NKP, -price_malathion, -price_millet_f, -contains("_price"), -month) %>% 
+  group_by(regions, district,settlement, yrmo) %>% 
   summarise_all(funs(median(., na.rm = TRUE))) #%>% 
   # filter(month %in% prev2_month_number:month_number) 
   
-  
+
 
 
 
 ## Calculate proximity: if a price is missing take the mean of settlement, or district, otherwise, regions
 ## this was previous code it fails to preserve previous round meb values that match previous factsheet because
 ## imputation was done using different data sets. FIXED in code below.
-meb_items <- meb_items %>%
-  group_by(settlement, month) %>%
-  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
 
-meb_items <- meb_items %>% group_by(district, month) %>%
-  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+meb_items<- meb_items %>% 
+  group_by(settlement, yrmo) %>% 
+  mutate(across(where(is.numeric),~ifelse(is.na(.),mean(.,na.rm=T),.))) %>% 
+  ungroup() %>% 
+  group_by(district, yrmo) %>% 
+  mutate(across(where(is.numeric),~ifelse(is.na(.),mean(.,na.rm=T),.))) %>% 
+  ungroup() %>% 
+  group_by(regions, yrmo) %>% 
+  mutate(across(where(is.numeric),~ifelse(is.na(.),mean(.,na.rm=T),.)))
 
-meb_items <- meb_items %>% group_by(regions, month) %>%
-  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
-  ungroup()
 
+# this is all prone to error and we need to shift to yrmo instead of month framework anyways. updated above
+# meb_items <- meb_items %>%
+#   group_by(settlement, month) %>%
+#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+# 
+# meb_items <- meb_items %>% group_by(district, month) %>%
+#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .))
+# 
+# meb_items <- meb_items %>% group_by(regions, month) %>%
+#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
+#   ungroup()
 
+prior_2_rounds<- c(yrmo_to_include[length(yrmo_to_include)-1],yrmo_to_include[length(yrmo_to_include)-2])
+current_and_prior_round<- c(yrmo_to_include[length(yrmo_to_include)],yrmo_to_include[length(yrmo_to_include)-1])
 ## If NA put price from last round
 meb_items_for_prev_month_imputation<-meb_items %>%
-  filter(month %in% prev2_month_number: prev1_month_number)
+  filter(yrmo %in% prior_2_rounds)
 
 meb_items_for_this_month_imputation<-meb_items %>%
-  filter(month %in% prev1_month_number:month_number)
+  filter(yrmo %in% current_and_prior_round)
 
+# this improvement should yield better values since we start by aggregating at settlement level
 meb_items_this_round <- meb_items_for_this_month_imputation %>%
-  group_by(regions) %>%
-  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
-  filter(month %in% month_number)
+  group_by(settlement) %>% 
+  mutate(across(where(is.numeric),~ifelse(is.na(.),mean(.,na.rm=T),.))) %>% 
+  ungroup() %>% 
+  group_by(district) %>% 
+  mutate(across(where(is.numeric),~ifelse(is.na(.),mean(.,na.rm=T),.))) %>% 
+  ungroup() %>% 
+  group_by(regions) %>% 
+  mutate(across(where(is.numeric),~ifelse(is.na(.),mean(.,na.rm=T),.))) %>% 
+  filter(yrmo %in% yrmo_constructed)
+# 
+# meb_items_this_round <- meb_items_for_this_month_imputation %>%
+#   group_by(regions) %>% 
+#   mutate(across(where(is.numeric),~ifelse(is.na(.),mean(.,na.rm=T),.))) %>% 
+#   filter(yrmo %in% yrmo_constructed)
 
+# just for this round i will keep this the same so that the values match... next round, we must change to the same 
+# aggregation scheme as above
 meb_items_last_round <- meb_items_for_prev_month_imputation %>%
-  group_by(regions) %>%
-  mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
-  filter(month %in% prev1_month_number)
+  group_by(regions) %>% 
+  mutate(across(where(is.numeric),~ifelse(is.na(.),mean(.,na.rm=T),.))) %>% 
+  filter(yrmo %in% yrmo_to_include[length(yrmo_to_include)-1])
+
+
+# meb_items_this_round <- meb_items_for_this_month_imputation %>%
+#   group_by(regions) %>%
+#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
+#   filter(month %in% month_number)
+# 
+# meb_items_last_round <- meb_items_for_prev_month_imputation %>%
+#   group_by(regions) %>%
+#   mutate_all(~ifelse(is.na(.), mean(., na.rm = TRUE), .)) %>% 
+#   filter(month %in% prev1_month_number)
+
 
 meb_items<- bind_rows(meb_items_this_round, meb_items_last_round)
-meb_items<- meb_items %>% 
-  mutate(collection_order = ifelse(month == month_number, 4,
-                                   ifelse(month == prev1_month_number,3, 1)),
-         month=month(month, label = T, abbr=F))
+    # month=month(month, label = T, abbr=F))
 
 ## Calculate MEB for food items
 meb_items$meb_maize_f <- meb_items$price_maize_f * 8.7 * 5
@@ -147,16 +185,26 @@ meb_items <- round_df(meb_items, digits = 0)
 
 ### Rbind march mebs in
 meb_items <- plyr::rbind.fill(march_mebs, meb_items)
+# changed to yrmo
+meb_items<- meb_items %>% 
+  mutate(collection_order = ifelse(yrmo == yrmo_constructed, 4,
+                                   ifelse(yrmo == yrmo_to_include[length(yrmo_to_include)-1],3, 1))
+  )
+
+meb_items %>% select(yrmo, collection_order)
+
+
 
 meb_items <- meb_items %>% select("month", everything())
+meb_items <- meb_items %>% select(yrmo, everything())
   
 
 
 
 ## regions
 meb_items_regional <- meb_items %>%  select(-district,-settlement) %>% 
-  group_by(regions,month) %>% 
-  summarise_all(funs(mean(., na.rm = TRUE)))
+  group_by(regions,yrmo) %>% 
+  summarise(across(where(is.numeric),~mean(.,na.rm=T)))
 
 
 meb_items_regional <- round_df(meb_items_regional, digits = 0)
@@ -165,9 +213,13 @@ names(meb_items_regional)[names(meb_items_regional) == "meb_food"] <- "regional_
 names(meb_items_regional)[names(meb_items_regional) == "meb_full"] <- "regional_meb_full"
 
 ## National
-meb_items_national <- meb_items %>%  select(-district,-settlement, -regions) %>% 
-  group_by(month) %>% 
-  summarise_all(funs(mean(., na.rm = TRUE)))
+# meb_items_national <- meb_items %>%  select(-district,-settlement, -regions) %>% 
+#   group_by(month) %>% 
+#   summarise_all(funs(mean(., na.rm = TRUE)))
+
+meb_items_national<- meb_items %>%  select(-district,-settlement, -regions) %>% 
+  group_by(yrmo) %>% 
+  summarise(across(where(is.numeric),~mean(.,na.rm=T)))
 
 meb_items_national$regions <- "nationwide"
 
@@ -177,7 +229,7 @@ names(meb_items_national)[names(meb_items_national) == "meb_food"] <- "national_
 names(meb_items_national)[names(meb_items_national) == "meb_full"] <- "national_meb_full"
 
 ## Calculate the top three most expansive settlements
-rank_settlments <- meb_items %>% filter(month == this_round_vec)
+rank_settlments <- meb_items %>% filter(yrmo == yrmo_constructed)
 
 top_settlments <- rank_settlments %>% ungroup () %>% select(settlement, meb_full) %>%
                                  arrange(desc(meb_full))%>% mutate(rank = 1:nrow(rank_settlments)) %>% filter(rank <= 3)

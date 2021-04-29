@@ -30,10 +30,13 @@ regional_wn <- region_items %>% filter(month == this_round_vec & regions == "wes
 colnames(regional_wn) <- paste0("westnile_", colnames(regional_wn))
 
 # Extracting relevant data - Settlement
-settlement_dm <- settlement_items %>% filter(month == this_round_vec) %>% ungroup() %>%
-                                      select(-collection_order, -district, -regions, -price_nails, -month) %>% gather(var_name, var_value, -settlement) %>%
-                                      mutate(new_var = paste0(settlement,"_",var_name)) %>% select(new_var, var_value) %>%
-                                      pivot_wider(names_from = new_var, values_from = var_value)
+settlement_dm <- settlement_items %>% 
+  filter(yrmo == yrmo_constructed) %>% ungroup() %>%
+  select(-collection_order, -district, -regions, -price_nails, -month, -yrmo) %>% 
+  gather(var_name, var_value, -settlement) %>% 
+  mutate(new_var = paste0(settlement,"_",var_name)) %>%
+  select(new_var, var_value) %>%
+  pivot_wider(names_from = new_var, values_from = var_value)
 
 
 
@@ -84,25 +87,36 @@ percent_change_set <- change_settlement %>% select(-contains("collection_")) %>%
 ##############################
 
 ## Settlement data merge
-meb_set <- meb_items %>% filter(collection_order == 4) %>% ungroup() %>% select(-collection_order, -month, -regions, -district) %>%
-                         gather(var_name, var_value, -settlement) %>% mutate(new_var = paste0(settlement,"_",var_name)) %>% select(new_var, var_value) %>%
-                         pivot_wider(names_from = new_var, values_from = var_value)
+meb_set <- meb_items %>% filter(yrmo == yrmo_constructed) %>%
+  ungroup() %>% 
+  select(-collection_order, -month, -regions, -district, -yrmo) %>%
+  gather(var_name, var_value, -settlement) %>% mutate(new_var = paste0(settlement,"_",var_name)) %>% 
+  select(new_var, var_value) %>%
+  pivot_wider(names_from = new_var, values_from = var_value)
 
 
 
 ## Regional data merge
-meb_reg_sw <- meb_items_regional %>% filter(collection_order == 4 & regions == "south west") %>% ungroup() %>% select(-regions, -month, -collection_order)
+meb_reg_sw <- meb_items_regional %>%
+  filter(yrmo == yrmo_constructed & regions == "south west") %>%
+  ungroup() %>%
+  select(-any_of(c("regions", "month", "collection_order","yrmo")))
 
 colnames(meb_reg_sw) <- paste0("southwest_", colnames(meb_reg_sw))
 
-meb_reg_wn <- meb_items_regional %>% filter(collection_order == 4 & regions == "west nile") %>% ungroup() %>% select(-regions, -month, -collection_order)
+meb_reg_wn <- meb_items_regional %>% 
+  filter(yrmo == yrmo_constructed & regions == "west nile") %>%
+  ungroup() %>%
+  select(- any_of(c("regions", "month", "collection_order","yrmo")))
 
 colnames(meb_reg_wn) <- paste0("westnile_", colnames(meb_reg_wn))
 
 
 
 ## National data merge
-meb_nat <- meb_items_national %>% filter(collection_order == 4) %>% select(-month, -collection_order)
+meb_nat <- meb_items_national %>% 
+  filter(yrmo == yrmo_constructed) %>%
+  select(-any_of(c("month", "collection_order")))
 
 colnames(meb_nat) <- paste0("national_", colnames(meb_nat))
 
