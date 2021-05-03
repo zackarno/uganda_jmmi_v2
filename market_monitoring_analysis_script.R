@@ -181,31 +181,31 @@ nan_inf_to_na <- function(x) {
 
 national_items <- item_prices_for_pct_change %>%  
   select(-uuid, -regions, -district, -settlement, -market_final) %>% 
-  group_by(month, collection_order) %>% 
+  group_by(yrmo, collection_order) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
 markets_items <- item_prices_for_pct_change %>%  select(-uuid,-regions,-district) %>% 
-  group_by(settlement,market_final,month) %>% 
+  group_by(settlement,market_final,yrmo) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>% 
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
 settlement_items <- item_prices_for_pct_change %>%  select(-uuid,-market_final) %>% 
-  group_by(regions,district,settlement,month) %>% 
+  group_by(regions,district,settlement,yrmo) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 
 
 district_items <- item_prices_for_pct_change %>%  select(-uuid,-settlement,-market_final) %>% 
-  group_by(regions,district,month) %>% 
+  group_by(regions,district,yrmo) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)  
 
 
 region_items <- item_prices_for_pct_change %>%  select(-uuid,-market_final,-district,-settlement) %>% 
-  group_by(regions,month) %>% 
+  group_by(regions,yrmo) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) %>%
   mutate_at(vars(-group_cols()), nan_inf_to_na)
 

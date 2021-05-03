@@ -14,16 +14,16 @@ num_assessed_merge <- num_assessed_merge %>% mutate(new_var = paste0(num_market_
 ##############################
 
 # Extracting relevant data - National
-national <- national_items %>% filter(collection_order == 4) %>% ungroup() %>% select(-collection_order, -price_nails, -month)
+national <- national_items %>% filter(yrmo == yrmo_constructed) %>% ungroup() %>% select(-collection_order, -price_nails, -month)
 colnames(national) <- paste0("national_", colnames(national))
 
 # Extracting relevant data - Regional
-regional_sw <- region_items %>% filter(month == this_round_vec & regions == "south west") %>% ungroup() %>% 
+regional_sw <- region_items %>% filter(yrmo == yrmo_constructed& regions == "south west") %>% ungroup() %>% 
                                 select(-collection_order, -price_nails, -month)
 
 colnames(regional_sw) <- paste0("southwest_", colnames(regional_sw))
 
-regional_wn <- region_items %>% filter(month == this_round_vec & regions == "west nile") %>% ungroup() %>% 
+regional_wn <- region_items %>% filter(yrmo == yrmo_constructed & regions == "west nile") %>% ungroup() %>% 
                                 select(-collection_order, -price_nails, -month)
 
 
