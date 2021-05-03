@@ -360,8 +360,8 @@ top3_uganda <- summary.stats.list %>% filter(dependent.var == "payment_type" |
                                                dependent.var == "safety_reason_less_secure" |
                                                dependent.var == "safety_reason_more_secure" |
                                                dependent.var == "item_scarcity_reason" |
-                                               dependent.var == "price_increase_item" |
-                                               dependent.var == "price_decrease_item" |
+                                               dependent.var == "price_increase_item" | 
+                                               dependent.var == "price_decrease_item" | 
                                                dependent.var == "challenge") %>% 
   filter(independent.var.value == "uganda") %>%
   arrange(desc(numbers)) %>%
